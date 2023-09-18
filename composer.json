@@ -1,0 +1,15 @@
+{
+    "name": "g28/vistasoft-monitor",
+    "autoload": {
+        "psr-4": {
+            "G28\\VistasoftMonitor\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Guilherme Pereira",
+            "email": "guilherme00pereira@gmail.com"
+        }
+    ],
+    "require": {}
+}
