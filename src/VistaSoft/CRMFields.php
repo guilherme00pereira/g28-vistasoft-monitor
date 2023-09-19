@@ -1,6 +1,6 @@
 <?php
 
-namespace G28\VistasoftMonitor\Api;
+namespace G28\VistasoftMonitor\VistaSoft;
 
 class CRMFields
 {

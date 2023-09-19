@@ -2,7 +2,7 @@
 
 namespace G28\VistasoftMonitor\Core;
 
-use G28\VistasoftMonitor\Api\PropertyDAO;
+use G28\VistasoftMonitor\VistaSoft\PropertyDAO;
 
 class TermTaxonomies {
 

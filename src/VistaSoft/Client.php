@@ -1,11 +1,11 @@
 <?php
 
-namespace G28\VistasoftMonitor\Api;
+namespace G28\VistasoftMonitor\VistaSoft;
 
 use G28\VistasoftMonitor\Core\Logger;
 use G28\VistasoftMonitor\Core\OptionManager;
 
-class VistaSoftClient
+class Client
 {
     const CRM_KEY               = "bb4f8f411b1497f17dbfd6eac10f776c";// "8c9b11b4da74d8f96f032ba117219fce";
     const CRM_URL               = "http://cli7490-rest.vistahost.com.br/";

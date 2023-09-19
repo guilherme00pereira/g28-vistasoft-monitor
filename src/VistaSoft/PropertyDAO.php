@@ -1,6 +1,6 @@
 <?php
 
-namespace G28\VistasoftMonitor\Api;
+namespace G28\VistasoftMonitor\VistaSoft;
 
 use Exception;
 use G28\VistasoftMonitor\Core\Logger;
