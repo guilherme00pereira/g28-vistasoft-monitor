@@ -1,31 +1,26 @@
 <?php
 
-use G28\IntegraJetengineVistasoft\Config\Plugin;
+use G28\VistasoftMonitor\Core\Logger;
 
-$default_tab = null;
-$tab         = isset($_GET['tab']) ? $_GET['tab'] : $default_tab;
+[ $file, $log ] = Logger::getInstance()->getLogFileContent();
 ?>
 
 <div class="wrap">
     <h1>VistaSoft</h1>
-    <nav class="nav-tab-wrapper">
-    <a href="?page=integra-jetengine-vistasoft" class="nav-tab <?php if($tab===null):?>nav-tab-active<?php endif; ?>">Campos do Imóvel</a>
-    <!--a href="?page=integra-jetengine-vistasoft&tab=features" class="nav-tab <?php if($tab==='features'):?>nav-tab-active<?php endif; ?>">Características do Imóvel</a-->
-    <a href="?page=integra-jetengine-vistasoft&tab=logs" class="nav-tab <?php if($tab==='logs'):?>nav-tab-active<?php endif; ?>">Logs</a>
-    </nav>
+    <h3>Comparação de imóveis cadastrados no CRM e no Site</h3>
+    <div class="log-container">
+        <div class="log-select-wrapper">
+            <button id="btnProcess" class="button g28-button-green">Iniciar processamento</button>
+            <span id="loadingLogs" style="display: none; padding-left: 15px;">
+                <img src="<?php echo esc_url( get_admin_url() . 'images/spinner.gif' ); ?>" alt="loading"/>
+            </span>
+        </div>
 
-    <div class="g28-integra-tab-content">
-    <?php switch($tab) :
-    case 'logs':
-        include sprintf( "%slogs.php", Plugin::getTemplateDir() );
-        break;
-    case 'features':
-        include sprintf( "%sfeatures-mapper.php", Plugin::getTemplateDir() );
-        break;    
-    default:
-        include sprintf( "%sfields-mapper.php", Plugin::getTemplateDir() );
-        break;
-    endswitch; 
-        ?>
+        <div id="logFileContent" class="log-content">
+			<?php echo $log ?>
+        </div>
+
     </div>
+
+
 </div>

@@ -1,0 +1,46 @@
+.g28-button-danger {
+    color: #b12229 !important;
+    border-color: #b12229 !important;
+    background: #f6f7f7 !important;
+}
+
+.g28-button-green {
+    color: #fff !important;
+    border-color: #4caf50 !important;
+    background: #4caf50 !important;
+    margin-bottom: 20px !important;
+}
+
+.g28-integra-tab-content {
+    margin: 1em;
+}
+
+.table-fields {
+    margin: 2rem;
+}
+
+.table-fields th {
+    font-size: 1.25em;
+}
+
+.table-fields td {
+    text-align: center;
+}
+
+.table-fields span {
+    color: #777777;
+}
+
+.log-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.log-content {
+    margin: 0;
+    padding: 2rem;
+    height: 400px;
+    background-color: white;
+    border: 1px solid #DCDCDE;
+    overflow-y: auto;
+}

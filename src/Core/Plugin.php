@@ -46,15 +46,21 @@ class Plugin {
 	 */
 	private static string $template_dir;
 
+	/**
+	 * @var string
+	 */
+	private static string $log_dir;
+
 	public function __construct( $root ) {
 		self::$url              = plugin_dir_url( $root );
 		self::$dir              = plugin_dir_path( $root );
 		self::$plugin_base      = plugin_basename( $root );
 		self::$template_dir     = self::$dir . 'templates/';
+		self::$log_dir		    = self::$dir . 'logs/';
 		self::$slug             = trim( dirname( self::$plugin_base ), '/' );
 		self::$assets_url       = self::$url . 'assets/';
 		self::$text_domain      = self::$slug;
-		self::$assets_prefix    = 'g28_integrajetvsoft_';
+		self::$assets_prefix    = 'g28_vistasoft_monitor';
 	}
 
 	public static function getInstance( $root ): ?Plugin {
@@ -91,6 +97,13 @@ class Plugin {
 	 */
 	public static function getTemplateDir(): string {
 		return self::$template_dir;
+	}
+
+	/**
+	 * @return string
+	 */
+	public static function getLogDir(): string {
+		return self::$log_dir;
 	}
 
 	/**
