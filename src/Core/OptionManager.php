@@ -6,8 +6,8 @@ use G28\VistasoftMonitor\VistaSoft\PropertyDAO;
 
 class OptionManager
 {
-    const OPTIONS_NAME      = 'g28-integrajetvsoft_options';
-	const OPTIONS_CRON      = 'g28-integrajetvsoft_g28-cron-next-page';
+    const OPTIONS_NAME      = 'g28-vistasoft-monitor_options';
+	const OPTIONS_CRON      = 'g28-vistasoft-monitor_g28-cron-next-page';
 
 	private $options;
 	private $cronOptions;
@@ -49,38 +49,10 @@ class OptionManager
 		]);
 	}
 
-	public function saveFieldsMapping( $fields )
-    {
-        $this->options['fields'] = $fields;
-        update_option(self::OPTIONS_NAME, $this->options);
-    }
-
-	public function saveFeaturesMapping( $fields )
-    {
-        $this->options['features'] = $fields;
-        update_option(self::OPTIONS_NAME, $this->options);
-    }
-
 	public function getFieldsMapping(): array
 	{
 		//return $this->options['fields'];
 		return $this->fieldsOptions();
-	}
-
-	public function getFeaturesMapping()
-	{
-		return $this->options['features'];
-	}
-
-	public function getCrmFields(): array
-	{
-		$crmFields = [];
-		$fields = $this->options['fields'];
-		foreach($fields as $field)
-		{
-			$crmFields[] = $field['crm'];
-		}
-		return $crmFields;
 	}
 
 	public function getNextPage()

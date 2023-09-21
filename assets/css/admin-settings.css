@@ -44,3 +44,57 @@
     border: 1px solid #DCDCDE;
     overflow-y: auto;
 }
+
+.toggle-section {
+    padding: 10px 0 30px;
+}
+
+.toggle-button{
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 26px;
+}
+.toggle-button input{
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+.toggle-button .knob{
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #c2bdbd;
+    transition: .2s;
+    border-radius: 20px;
+}
+.toggle-button .knob:before{
+    background-color: #ffffff;
+    color: #000000;
+    position: absolute;
+    content: '';
+    height: 18px;
+    width: 19px;
+    left: 4px;
+    bottom: 4px;
+    transition: .2s;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.toggle-button input:checked + .knob{
+    background-color: #4caf50;
+}
+
+.toggle-button input:checked + .knob:before{
+    color: #000000;
+    content: '';
+    background-color: #ffffff;
+    -webkit-transform: translateX(23px);
+    -ms-transform: translateX(23px);
+    transform: translateX(23px);
+}

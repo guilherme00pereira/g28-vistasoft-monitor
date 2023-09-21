@@ -15,6 +15,8 @@ class Client
     private array $requestArgs;
     private array $codesQueue;
 
+	private array $codesFromDb;
+
     public function __construct()
     {
         $this->requestArgs      = [ 'headers' => ['Accept' => 'application/json'] ];
@@ -61,7 +63,7 @@ class Client
 	    $page           = $optionManager->getNextPage();
 	    Logger::getInstance()->add("");
 	    Logger::getInstance()->add("");
-        Logger::getInstance()->add("Iniciando importação de imóveis - página: " . $page);
+        Logger::getInstance()->add("Listando imóveis do CRM - página: " . $page);
         $items      = $this->makeRequest( self::CRM_LIST_ENDPOINT, true, $page );
         if( empty( $items ) ) {
             Logger::getInstance()->add("Nenhum imóvel retornado");

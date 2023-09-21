@@ -14,7 +14,7 @@ class Controller
 	{
 		add_action('admin_menu', array($this, 'addPage' ));
 		add_action( 'admin_enqueue_scripts', [ $this, 'registerStylesAndScripts'] );
-		add_action( 'wp_ajax_ajaxGetLog', [ $this, 'ajaxGetLog' ] );
+		add_action( 'wp_ajax_process', [ $this, 'process' ] );
 	}
 
 	public function addPage()
@@ -48,9 +48,9 @@ class Controller
 	public function process()
 	{
 		try {
-			$api = new Client();
+			$vistasoft = new Client();
 			wp_verify_nonce( 'g28_vistasoft_monitor_nonce' );
-
+			$vistasoft->listRealStates();
 			$content    = Logger::getInstance()->getLogFileContent();
 			echo json_encode(['success' => true, 'message' => $content]);
 		} catch (Exception $e) {

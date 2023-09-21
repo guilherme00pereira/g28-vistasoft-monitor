@@ -1,28 +1,24 @@
 (function ($) {
 
+	let autoProcess = false;
+
 	$(document).on('click', '#btnProcess', function (e) {
-		e.preventDefault();
+		const div = $('#actionReturn');
+		const loading = $('#loadingLogs');
+		loading.show()
 		let params = {
 			action: ajaxobj.action_Process,
 			nonce: ajaxobj.g28_vistasoft_monitor_nonce,
 		}
-		doAjax(params, '#loadingLogs')
+		$.get(ajaxobj.ajax_url, params, function(res){
+			loading.hide()
+			div.html(res.message);
+		}, 'json');
 	});
 
+	$(document).on('click', '.toggle-button', function (e) {
 
-	function doAjax(params, loadingField) {
-		const div = $('#actionReturn');
-		const loading = $(loadingField);
-		$.post(ajaxobj.ajax_url, params, function(res){
-			loading.show()
-			if(res.success) {
-				div.addClass('notice notice-success notice-alt')
-			} else {
-				div.addClass('notice notice-error notice-alt')
-			}
-			div.html(res.message);
-			loading.hide()
-		}, 'json');
-	}
+	});
+
 
 }(jQuery));
