@@ -1,0 +1,4 @@
+[ 22/09/2023 12:57:46 PM ] Importação dos imóveis finalizada!
+[ 22/09/2023 12:57:46 PM ] Nenhum imóvel retornado
+[ 22/09/2023 12:57:46 PM ] Erro ao importar imóveis da apicURL error 28: Failed to connect to cli7490-rest.vistahost.com.br port 80: Timed out
+[ 22/09/2023 12:57:43 PM ] Listando imóveis do CRM - página: 1
