@@ -7,6 +7,7 @@ use G28\VistasoftMonitor\VistaSoft\Client;
 use G28\VistasoftMonitor\Core\Logger;
 use G28\VistasoftMonitor\Core\OptionManager;
 use G28\VistasoftMonitor\Core\Plugin;
+use G28\VistasoftMonitor\VistaSoft\PropertiesManager;
 
 class Controller
 {
@@ -48,9 +49,9 @@ class Controller
 	public function process()
 	{
 		try {
-			$vistasoft = new Client();
 			wp_verify_nonce( 'g28_vistasoft_monitor_nonce' );
-			$vistasoft->listRealStates();
+			$client = new Client();
+			$client->listRealStates();
 			$content    = Logger::getInstance()->getLogFileContent();
 			echo json_encode(['success' => true, 'message' => $content]);
 		} catch (Exception $e) {

@@ -3,7 +3,7 @@
 	let autoProcess = false;
 
 	$(document).on('click', '#btnProcess', function (e) {
-		const div = $('#actionReturn');
+		const div = $('#logFileContent');
 		const loading = $('#loadingLogs');
 		loading.show()
 		let params = {

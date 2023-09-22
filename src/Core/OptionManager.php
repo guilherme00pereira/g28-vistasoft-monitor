@@ -2,7 +2,7 @@
 
 namespace G28\VistasoftMonitor\Core;
 
-use G28\VistasoftMonitor\VistaSoft\PropertyDAO;
+use G28\VistasoftMonitor\VistaSoft\PropertiesManager;
 
 class OptionManager
 {
@@ -24,7 +24,7 @@ class OptionManager
 		if( is_bool( get_option(self::OPTIONS_NAME) ) ) {
 			update_option( self::OPTIONS_NAME, [
 				'fields'		=> $this->fieldsOptions(),
-				'post_type'		=> PropertyDAO::POSTTYPE,
+				'post_type'		=> PropertiesManager::POSTTYPE,
 				'features'		=> $this->featuresOptions(),
 			 ] );
 		}
@@ -40,7 +40,7 @@ class OptionManager
 	{
 		update_option( self::OPTIONS_NAME, [
 			'fields'		=> ( new OptionManager )->fieldsOptions(),
-			'post_type'		=> PropertyDAO::POSTTYPE,
+			'post_type'		=> PropertiesManager::POSTTYPE,
 			'features'		=> ( new OptionManager )->featuresOptions(),
 		]);
 		update_option(self::OPTIONS_CRON, [

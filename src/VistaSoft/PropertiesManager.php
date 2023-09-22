@@ -7,7 +7,7 @@ use G28\VistasoftMonitor\Core\Logger;
 use G28\VistasoftMonitor\Core\OptionManager;
 use G28\VistasoftMonitor\Core\TermTaxonomies;
 
-class PropertyDAO {
+class PropertiesManager {
 
 	const ADD		= 'add';
 	const UPDATE	= 'update';
@@ -16,10 +16,8 @@ class PropertyDAO {
 	const POSTTYPE = 'imovel';
 	const BOATTYPE = 'embarcacao';
 	private array $dbKeys;
-	private array $dataQueue;
 
 	public function __construct() {
-		$this->dataQueue = [];
 		$this->dbKeys    = $this->getIdsFromDB();
 	}
 
@@ -49,18 +47,31 @@ class PropertyDAO {
 		$this->dataQueue[] = $data;
 	}
 
-	public function run()
+	public function run( $codes )
 	{
 		$this->doImports();
-		foreach ( $this->dataQueue as $item ) {
+		
+		foreach ( $codes as $code ) {
 			sleep( 1 );
+
+			if( $code->ExibirNoSite !== "Sim" ) {
+				Logger::getInstance()->add("Imóvel: " . $code->Codigo . " não deve ser exibido no site");
+				$manager->remove( $code->Codigo );
+			} else {
+				$data = $this->getRealStateData( $code );
+				if( !empty( $data ) )
+				{
+					$manager->setToQueue( $data );
+				}
+			}
+
 			try {
-				[ $meta_values, $terms ] = $this->mapColumns( $item );
-				if ( in_array( $item->Codigo, $this->dbKeys ) ) {
-					Logger::getInstance()->add( "Atualizando dados do imóvel: " . $item->Codigo );
-					$this->updateDatabaseContent( $meta_values, $terms, $item->Codigo );
+				[ $meta_values, $terms ] = $this->mapColumns( $code->Codigo );
+				if ( in_array( $code->Codigo, $this->dbKeys ) ) {
+					Logger::getInstance()->add( "Atualizando dados do imóvel: " . $code->Codigo );
+					$this->updateDatabaseContent( $meta_values, $terms, $code->Codigo );
 				} else {
-					Logger::getInstance()->add( "Cadastrando o imóvel: " . $item->Codigo );
+					Logger::getInstance()->add( "Cadastrando o imóvel: " . $code->Codigo );
 					$this->updateDatabaseContent( $meta_values, $terms );
 				}
 			} catch ( Exception $e ) {

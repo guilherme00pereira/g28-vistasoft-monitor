@@ -51,9 +51,9 @@ class CRMFields
 	public static function getQueryArgs( $page )
 	{
 		return json_encode( [
-			"fields"    => [],
+			"fields"    => ["ExibirNoSite"],
 			"filter"    => [],
-			"paginacao" => [ "pagina" => $page, "quantidade" => 1 ]
+			"paginacao" => [ "pagina" => $page, "quantidade" => 50 ]
 		] );
 	}
 

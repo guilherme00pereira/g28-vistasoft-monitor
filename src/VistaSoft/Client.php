@@ -40,63 +40,58 @@ class Client
     public function processProperty( $code, $action )
     {
         Logger::getInstance()->add("Buscando dados do imóvel: " . $code);
-        $dao = new PropertyDAO();
-		if( $action === PropertyDAO::REMOVE)
+        $manager = new PropertiesManager();
+		if( $action === PropertiesManager::REMOVE)
 		{
-			$dao->remove( $code );
+			$manager->remove( $code );
 		}
 		else
 		{
 			$data = $this->getRealStateData( $code );
 			if( empty( $data ) ) {
 				Logger::getInstance()->add("Dados do imóvel: " . $code . " não retornados pelo CRM");
-				$dao->remove( $code );
+				$manager->remove( $code );
 			} else {
-				$dao->addOrUpdate( $data );
+				$manager->addOrUpdate( $data );
 			}
         }
     }
 
     public function listRealStates()
     {
-	    $optionManager  = new OptionManager();
-	    $page           = $optionManager->getNextPage();
-	    Logger::getInstance()->add("");
-	    Logger::getInstance()->add("");
-        Logger::getInstance()->add("Listando imóveis do CRM - página: " . $page);
-        $items      = $this->makeRequest( self::CRM_LIST_ENDPOINT, true, $page );
-        if( empty( $items ) ) {
-            Logger::getInstance()->add("Nenhum imóvel retornado");
-        } else {
-			$optionManager->updateCronOptions( $items->paginas );
-            $this->walkThrough( $items );
-            $this->processRealStateData();
-        }
+		Logger::getInstance()->clear();
+	    $items = $this->requestPage(1);
+	    $this->walkThrough( $items );
+	    for( $page = 2; $page <= $items->paginas; $page++ ) {
+		    $items = $this->requestPage( $page );
+		    $this->walkThrough( $items );
+	    }
+	    $manager = new PropertiesManager();
+	    $manager->run( $this->codesQueue );
     }
+
+	/**
+	 * @return mixed
+	 */
+	public function requestPage($page) {
+		Logger::getInstance()->add( "Listando imóveis do CRM - página: " . $page );
+		return $this->makeRequest( self::CRM_LIST_ENDPOINT, true, $page );
+	}
 
     private function walkThrough( $items )
     {
-        foreach( $items as $item ) {
-            if( is_object( $item ) ) {
-                $this->codesQueue[] = $item->Codigo;
-            }
-        }
-		Logger::getInstance()->add("Buscando dados imóveis códigos: " . implode(",", $this->codesQueue));
-    }
-
-    private function processRealStateData()
-    {
-        $dao = new PropertyDAO();
-        foreach( $this->codesQueue as $code )
-        {
-            sleep(1);
-            $data = $this->getRealStateData( $code );
-            if( !empty( $data ) )
-            {
-                $dao->setToQueue( $data );
-            }
-        }
-        $dao->run();
+	    if ( empty( $items ) ) {
+		    Logger::getInstance()->add( "Nenhum imóvel retornado" );
+	    } else {
+		    foreach ( $items as $item ) {
+			    if ( is_object( $item ) ) {
+				    $this->codesQueue[] = [
+					    "codigo" => $item->Codigo,
+					    "exibir" => $item->ExibirNoSite
+				    ];
+			    }
+		    }
+	    }
     }
 
     private function getRealStateData( $id )
@@ -115,5 +110,6 @@ class Client
 		}
         return $content;
     }
+
 
 }
