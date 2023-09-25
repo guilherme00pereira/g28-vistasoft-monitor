@@ -16,6 +16,8 @@ class Controller
 		add_action('admin_menu', array($this, 'addPage' ));
 		add_action( 'admin_enqueue_scripts', [ $this, 'registerStylesAndScripts'] );
 		add_action( 'wp_ajax_process', [ $this, 'process' ] );
+		add_action( 'wp_ajax_readLog', [ $this, 'readLog' ] );
+		add_action('wp_ajax_toggleAuto', [ $this, 'toggleAuto' ] );
 	}
 
 	public function addPage()
@@ -60,6 +62,29 @@ class Controller
 		wp_die();
 	}
 
+	public function readLog()
+	{
+		try {
+			$content    = Logger::getInstance()->getLogFileContent();
+			echo json_encode(['success' => true, 'message' => $content]);
+		} catch (Exception $e) {
+			echo json_encode(['error' => false, 'message' => 'Erro ao abrir arquivo de log.']);
+		}
+		wp_die();
+	}
+
+	public function toggleAuto()
+	{
+		try {
+			$optionManager = new OptionManager();
+			$optionManager->toggleAuto();
+			echo json_encode(['success' => true, 'message' => '']);
+		} catch (Exception $e) {
+			echo json_encode(['error' => false, 'message' => 'Erro ao abrir arquivo de log.']);
+		}
+		wp_die();
+	}
+
 	public function registerStylesAndScripts()
 	{
 		wp_register_style( Plugin::getAssetsPrefix() . 'admin_style', Plugin::getAssetsUrl() . 'css/admin-settings.css' );
@@ -74,6 +99,7 @@ class Controller
 			'ajax_url'        	            => admin_url( 'admin-ajax.php' ),
 			'g28_vistasoft_monitor_nonce'	=> wp_create_nonce( 'g28_vistasoft_monitor_nonce' ),
 			'action_Process'                 => 'process',
+			'action_ReadLog'                 => 'readLog',
 		]);
 	}
 

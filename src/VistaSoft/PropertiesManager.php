@@ -48,50 +48,39 @@ class PropertiesManager
 	{
 		$this->doImports();
 		foreach ($codes as $code) {
-			sleep(1);
+			sleep(3);
+			$exibir 	= $code['exibir'];
+			$codigo 	= $code['codigo'];
 			try {
-				Logger::getInstance()->add("Status: " . $code->ExibirNoSite);
-				if ($code->ExibirNoSite !== "Sim") {
-					Logger::getInstance()->add("Imóvel: " . $code->Codigo . " não deve ser exibido no site");
-					$this->remove($code->Codigo);
+				if ( $exibir !== "Sim") {
+					Logger::getInstance()->add("Imóvel: " . $codigo . " não deve ser exibido no site");
+					$this->remove($codigo);
 				} else {
-
 					$client = new Client();
-					$data = $client->getRealStateData($code->Codigo);
+					$data = $client->getRealStateData($codigo);
 					[$meta_values, $terms] = $this->mapColumns($data);
-					if (in_array($code->Codigo, $this->dbKeys)) {
-						Logger::getInstance()->add("Atualizando dados do imóvel: " . $code->Codigo);
-						$this->updateDatabaseContent($meta_values, $terms, $code->Codigo);
+					if (in_array($codigo, $this->dbKeys)) {
+						Logger::getInstance()->add("Atualizando dados do imóvel: " . $codigo);
 					} else {
-						Logger::getInstance()->add("Cadastrando o imóvel: " . $code->Codigo);
-						$this->updateDatabaseContent($meta_values, $terms);
+						Logger::getInstance()->add("Cadastrando o imóvel: " . $codigo);
 					}
-					$key = array_search($code->Codigo, $this->dbKeys);
+					$this->updateDatabaseContent($meta_values, $codigo, $terms);
+					$key = array_search($codigo, $this->dbKeys);
 					if ($key !== false) {
 						unset($this->dbKeys[$key]);
 					}
 
 				}
 			} catch (Exception $e) {
-				Logger::getInstance()->add("Erro ao processar o imóvel de código " . $code->Codigo . ": " . $e->getMessage());
+				Logger::getInstance()->add("Erro ao processar o imóvel de código " . $codigo . ": " . $e->getMessage());
 			}
 		}
+		Logger::getInstance()->add("Removendo imóveis presentes no banco, mas não retornados pelo CRM");
 		foreach ($this->dbKeys as $key) {
+			Logger::getInstance()->add("Removendo o imóvel: " . $key);
 			$this->cleanDatabaseAndMediaContent($key);
 		}
 		Logger::getInstance()->add("Importação dos imóveis finalizada!");
-	}
-
-	public function addOrUpdate($item)
-	{
-		$this->doImports();
-		try {
-			[$meta_values, $terms, $isEnterprise] = $this->mapColumns($item);
-			Logger::getInstance()->add("Atualizando dados do imóvel: " . $item->Codigo);
-			$this->updateDatabaseContent($meta_values, $item->Codigo, $terms, $isEnterprise);
-		} catch (Exception $e) {
-			Logger::getInstance()->add("Erro ao atualizar o imóvel no BD: " . $e->getMessage());
-		}
 	}
 
 	public function remove($code)
@@ -113,10 +102,11 @@ class PropertiesManager
 		if (is_null($post)) {
 			$post = wp_insert_post([
 				'post_title' => $title,
-				'post_content' => $values['descricao_do_imovel'],
+				'post_content' => empty($values['descricao-do-imovel']) ? "" : $values['descricao-do-imovel'],
 				'post_status' => 'publish',
 				'post_type' => $type
 			]);
+			
 			foreach ($values as $key => $value) {
 				add_post_meta($post, $key, $value);
 				if (count($terms) > 0) {
@@ -128,7 +118,7 @@ class PropertiesManager
 			wp_update_post([
 				'ID' => $post['ID'],
 				'post_title' => $title,
-				'post_content' => $values['descricao_do_imovel'],
+				'post_content' => empty($values['descricao-do-imovel']) ? "" : $values['descricao-do-imovel'],
 				'post_status' => 'publish',
 				'post_type' => $type
 			]);
@@ -138,11 +128,11 @@ class PropertiesManager
 					wp_delete_object_term_relationships($post, TermTaxonomies::TAXONOMY_STATE_CITY);
 					wp_set_object_terms($post['ID'], $terms, TermTaxonomies::TAXONOMY_STATE_CITY);
 				}
-				if ($isEnterprise) {
-					wp_set_object_terms($post['ID'], TermTaxonomies::ENTERPRISE_TERM_ID, TermTaxonomies::TAXONOMY_ENTERPRISE);
-				} else {
-					wp_delete_object_term_relationships($post, TermTaxonomies::TAXONOMY_ENTERPRISE);
-				}
+				// if ($isEnterprise) {
+				// 	wp_set_object_terms($post['ID'], TermTaxonomies::ENTERPRISE_TERM_ID, TermTaxonomies::TAXONOMY_ENTERPRISE);
+				// } else {
+				// 	wp_delete_object_term_relationships($post, TermTaxonomies::TAXONOMY_ENTERPRISE);
+				// }
 			}
 		}
 		Logger::getInstance()->add("Imóvel " . $code . " " . $action . " com sucesso!");

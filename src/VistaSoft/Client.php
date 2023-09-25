@@ -3,7 +3,6 @@
 namespace G28\VistasoftMonitor\VistaSoft;
 
 use G28\VistasoftMonitor\Core\Logger;
-use G28\VistasoftMonitor\Core\OptionManager;
 
 class Client
 {
@@ -35,26 +34,6 @@ class Client
 	        Logger::getInstance()->add("Erro ao importar imóveis da api" . $response->get_error_message());
         }
         return json_decode( wp_remote_retrieve_body( $response ) );
-    }
-
-    public function processProperty( $code, $action )
-    {
-        Logger::getInstance()->add("Buscando dados do imóvel: " . $code);
-        $manager = new PropertiesManager();
-		if( $action === PropertiesManager::REMOVE)
-		{
-			$manager->remove( $code );
-		}
-		else
-		{
-			$data = $this->getRealStateData( $code );
-			if( empty( $data ) ) {
-				Logger::getInstance()->add("Dados do imóvel: " . $code . " não retornados pelo CRM");
-				$manager->remove( $code );
-			} else {
-				$manager->addOrUpdate( $data );
-			}
-        }
     }
 
     public function listRealStates()
@@ -94,7 +73,7 @@ class Client
 	    }
     }
 
-    private function getRealStateData( $id )
+    public function getRealStateData( $id )
     {
         Logger::getInstance()->add("Importando dados do imóvel código: " . $id);
         $url        = self::CRM_URL . self::CRM_DETAILS_ENDPOINT . "?key=" . self::CRM_KEY . "&imovel=" . $id . "&pesquisa=" . CRMFields::getSearchArgs();

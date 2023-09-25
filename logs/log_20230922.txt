@@ -1,4 +1,493 @@
-[ 22/09/2023 12:57:46 PM ] Importação dos imóveis finalizada!
-[ 22/09/2023 12:57:46 PM ] Nenhum imóvel retornado
-[ 22/09/2023 12:57:46 PM ] Erro ao importar imóveis da apicURL error 28: Failed to connect to cli7490-rest.vistahost.com.br port 80: Timed out
-[ 22/09/2023 12:57:43 PM ] Listando imóveis do CRM - página: 1
+[ 22/09/2023 08:16:58 PM ] Empreendimento: 
+[ 22/09/2023 08:16:58 PM ] Lançamento: Nao
+[ 22/09/2023 08:16:56 PM ] Importando dados do imóvel código: CV0770
+[ 22/09/2023 08:16:55 PM ] Imóvel CV0940 cadastrado com sucesso!
+[ 22/09/2023 08:16:54 PM ] Cadastrando o imóvel: CV0940
+[ 22/09/2023 08:15:23 PM ] Empreendimento: 
+[ 22/09/2023 08:15:23 PM ] Lançamento: Nao
+[ 22/09/2023 08:15:22 PM ] Importando dados do imóvel código: CV0940
+[ 22/09/2023 08:15:21 PM ] Imóvel CV0937 cadastrado com sucesso!
+[ 22/09/2023 08:15:20 PM ] Cadastrando o imóvel: CV0937
+[ 22/09/2023 08:15:20 PM ] Empreendimento: 
+[ 22/09/2023 08:15:20 PM ] Lançamento: Nao
+[ 22/09/2023 08:15:19 PM ] Importando dados do imóvel código: CV0937
+[ 22/09/2023 08:15:18 PM ] Imóvel CV0935 cadastrado com sucesso!
+[ 22/09/2023 08:15:18 PM ] Cadastrando o imóvel: CV0935
+[ 22/09/2023 08:15:18 PM ] Empreendimento: 
+[ 22/09/2023 08:15:18 PM ] Lançamento: Nao
+[ 22/09/2023 08:15:17 PM ] Importando dados do imóvel código: CV0935
+[ 22/09/2023 08:15:16 PM ] Imóvel CV0931 cadastrado com sucesso!
+[ 22/09/2023 08:15:16 PM ] Cadastrando o imóvel: CV0931
+[ 22/09/2023 08:15:15 PM ] Empreendimento: 
+[ 22/09/2023 08:15:15 PM ] Lançamento: Nao
+[ 22/09/2023 08:15:15 PM ] Importando dados do imóvel código: CV0931
+[ 22/09/2023 08:15:14 PM ] Imóvel CV0740 cadastrado com sucesso!
+[ 22/09/2023 08:15:13 PM ] Cadastrando o imóvel: CV0740
+[ 22/09/2023 08:15:13 PM ] Empreendimento: 
+[ 22/09/2023 08:15:13 PM ] Lançamento: Nao
+[ 22/09/2023 08:15:13 PM ] Importando dados do imóvel código: CV0740
+[ 22/09/2023 08:15:12 PM ] Imóvel CV0930 cadastrado com sucesso!
+[ 22/09/2023 08:15:11 PM ] Cadastrando o imóvel: CV0930
+[ 22/09/2023 08:13:10 PM ] Empreendimento: 
+[ 22/09/2023 08:13:10 PM ] Lançamento: Nao
+[ 22/09/2023 08:13:07 PM ] Importando dados do imóvel código: CV0930
+[ 22/09/2023 08:13:06 PM ] Imóvel CV0927 cadastrado com sucesso!
+[ 22/09/2023 08:13:06 PM ] Cadastrando o imóvel: CV0927
+[ 22/09/2023 08:11:41 PM ] Empreendimento: 
+[ 22/09/2023 08:11:41 PM ] Lançamento: Nao
+[ 22/09/2023 08:11:37 PM ] Importando dados do imóvel código: CV0927
+[ 22/09/2023 08:11:36 PM ] Imóvel CV0925 cadastrado com sucesso!
+[ 22/09/2023 08:11:35 PM ] Cadastrando o imóvel: CV0925
+[ 22/09/2023 08:10:43 PM ] Empreendimento: 
+[ 22/09/2023 08:10:43 PM ] Lançamento: Nao
+[ 22/09/2023 08:10:41 PM ] Importando dados do imóvel código: CV0925
+[ 22/09/2023 08:10:40 PM ] Imóvel CV0921 cadastrado com sucesso!
+[ 22/09/2023 08:10:39 PM ] Cadastrando o imóvel: CV0921
+[ 22/09/2023 08:10:39 PM ] Empreendimento: 
+[ 22/09/2023 08:10:39 PM ] Lançamento: Nao
+[ 22/09/2023 08:10:37 PM ] Importando dados do imóvel código: CV0921
+[ 22/09/2023 08:10:36 PM ] Imóvel CV0915 cadastrado com sucesso!
+[ 22/09/2023 08:10:36 PM ] Cadastrando o imóvel: CV0915
+[ 22/09/2023 08:10:35 PM ] Empreendimento: 
+[ 22/09/2023 08:10:35 PM ] Lançamento: Nao
+[ 22/09/2023 08:10:35 PM ] Importando dados do imóvel código: CV0915
+[ 22/09/2023 08:10:34 PM ] Imóvel CV0913 cadastrado com sucesso!
+[ 22/09/2023 08:10:33 PM ] Cadastrando o imóvel: CV0913
+[ 22/09/2023 08:10:33 PM ] Empreendimento: 
+[ 22/09/2023 08:10:33 PM ] Lançamento: Nao
+[ 22/09/2023 08:10:30 PM ] Importando dados do imóvel código: CV0913
+[ 22/09/2023 08:10:29 PM ] Imóvel CV0908 cadastrado com sucesso!
+[ 22/09/2023 08:10:28 PM ] Cadastrando o imóvel: CV0908
+[ 22/09/2023 08:10:28 PM ] Empreendimento: 
+[ 22/09/2023 08:10:28 PM ] Lançamento: Nao
+[ 22/09/2023 08:10:28 PM ] Importando dados do imóvel código: CV0908
+[ 22/09/2023 08:10:27 PM ] Imóvel CV0907 cadastrado com sucesso!
+[ 22/09/2023 08:10:26 PM ] Cadastrando o imóvel: CV0907
+[ 22/09/2023 08:10:26 PM ] Empreendimento: 
+[ 22/09/2023 08:10:26 PM ] Lançamento: Nao
+[ 22/09/2023 08:10:24 PM ] Importando dados do imóvel código: CV0907
+[ 22/09/2023 08:10:23 PM ] Imóvel CV0744 cadastrado com sucesso!
+[ 22/09/2023 08:10:22 PM ] Cadastrando o imóvel: CV0744
+[ 22/09/2023 08:10:22 PM ] Empreendimento: 
+[ 22/09/2023 08:10:22 PM ] Lançamento: Nao
+[ 22/09/2023 08:10:20 PM ] Importando dados do imóvel código: CV0744
+[ 22/09/2023 08:10:19 PM ] Imóvel CV0735 cadastrado com sucesso!
+[ 22/09/2023 08:10:18 PM ] Cadastrando o imóvel: CV0735
+[ 22/09/2023 08:10:18 PM ] Empreendimento: 
+[ 22/09/2023 08:10:18 PM ] Lançamento: Nao
+[ 22/09/2023 08:10:16 PM ] Importando dados do imóvel código: CV0735
+[ 22/09/2023 08:10:15 PM ] Imóvel CV1025 cadastrado com sucesso!
+[ 22/09/2023 08:10:14 PM ] Cadastrando o imóvel: CV1025
+[ 22/09/2023 08:08:13 PM ] Empreendimento: 
+[ 22/09/2023 08:08:13 PM ] Lançamento: Nao
+[ 22/09/2023 08:08:11 PM ] Importando dados do imóvel código: CV1025
+[ 22/09/2023 08:08:10 PM ] Imóvel CV1024 cadastrado com sucesso!
+[ 22/09/2023 08:08:09 PM ] Cadastrando o imóvel: CV1024
+[ 22/09/2023 08:08:08 PM ] Empreendimento: 
+[ 22/09/2023 08:08:08 PM ] Lançamento: Nao
+[ 22/09/2023 08:08:08 PM ] Importando dados do imóvel código: CV1024
+[ 22/09/2023 08:08:07 PM ] Imóvel CV0902 cadastrado com sucesso!
+[ 22/09/2023 08:08:06 PM ] Cadastrando o imóvel: CV0902
+[ 22/09/2023 08:06:17 PM ] Empreendimento: 
+[ 22/09/2023 08:06:17 PM ] Lançamento: Nao
+[ 22/09/2023 08:06:15 PM ] Importando dados do imóvel código: CV0902
+[ 22/09/2023 08:06:14 PM ] Imóvel CV0800 cadastrado com sucesso!
+[ 22/09/2023 08:06:13 PM ] Cadastrando o imóvel: CV0800
+[ 22/09/2023 08:06:13 PM ] Empreendimento: 
+[ 22/09/2023 08:06:13 PM ] Lançamento: Nao
+[ 22/09/2023 08:06:13 PM ] Importando dados do imóvel código: CV0800
+[ 22/09/2023 08:06:12 PM ] Imóvel CV0763 cadastrado com sucesso!
+[ 22/09/2023 08:06:10 PM ] Cadastrando o imóvel: CV0763
+[ 22/09/2023 08:06:10 PM ] Empreendimento: 
+[ 22/09/2023 08:06:10 PM ] Lançamento: Nao
+[ 22/09/2023 08:06:09 PM ] Importando dados do imóvel código: CV0763
+[ 22/09/2023 08:06:08 PM ] Imóvel CV0886 cadastrado com sucesso!
+[ 22/09/2023 08:06:07 PM ] Cadastrando o imóvel: CV0886
+[ 22/09/2023 08:05:17 PM ] Empreendimento: 
+[ 22/09/2023 08:05:17 PM ] Lançamento: Nao
+[ 22/09/2023 08:05:15 PM ] Importando dados do imóvel código: CV0886
+[ 22/09/2023 08:05:14 PM ] Imóvel CV0880 cadastrado com sucesso!
+[ 22/09/2023 08:05:13 PM ] Cadastrando o imóvel: CV0880
+[ 22/09/2023 08:05:13 PM ] Empreendimento: 
+[ 22/09/2023 08:05:13 PM ] Lançamento: Nao
+[ 22/09/2023 08:05:13 PM ] Importando dados do imóvel código: CV0880
+[ 22/09/2023 08:05:12 PM ] Imóvel CV0879 cadastrado com sucesso!
+[ 22/09/2023 08:05:11 PM ] Cadastrando o imóvel: CV0879
+[ 22/09/2023 08:05:11 PM ] Empreendimento: 
+[ 22/09/2023 08:05:11 PM ] Lançamento: Nao
+[ 22/09/2023 08:05:11 PM ] Importando dados do imóvel código: CV0879
+[ 22/09/2023 08:05:10 PM ] Imóvel CV0878 cadastrado com sucesso!
+[ 22/09/2023 08:05:09 PM ] Cadastrando o imóvel: CV0878
+[ 22/09/2023 08:05:09 PM ] Empreendimento: 
+[ 22/09/2023 08:05:09 PM ] Lançamento: Nao
+[ 22/09/2023 08:05:08 PM ] Importando dados do imóvel código: CV0878
+[ 22/09/2023 08:05:07 PM ] Imóvel CV0801 cadastrado com sucesso!
+[ 22/09/2023 08:05:06 PM ] Cadastrando o imóvel: CV0801
+[ 22/09/2023 08:03:34 PM ] Empreendimento: 
+[ 22/09/2023 08:03:34 PM ] Lançamento: Nao
+[ 22/09/2023 08:03:31 PM ] Importando dados do imóvel código: CV0801
+[ 22/09/2023 08:03:30 PM ] Imóvel CV0876 cadastrado com sucesso!
+[ 22/09/2023 08:03:29 PM ] Cadastrando o imóvel: CV0876
+[ 22/09/2023 08:01:55 PM ] Empreendimento: 
+[ 22/09/2023 08:01:55 PM ] Lançamento: Nao
+[ 22/09/2023 08:01:53 PM ] Importando dados do imóvel código: CV0876
+[ 22/09/2023 08:01:52 PM ] Imóvel CV0871 cadastrado com sucesso!
+[ 22/09/2023 08:01:51 PM ] Cadastrando o imóvel: CV0871
+[ 22/09/2023 08:01:35 PM ] Empreendimento: 
+[ 22/09/2023 08:01:35 PM ] Lançamento: Nao
+[ 22/09/2023 08:01:33 PM ] Importando dados do imóvel código: CV0871
+[ 22/09/2023 08:01:32 PM ] Imóvel CV0789 cadastrado com sucesso!
+[ 22/09/2023 08:01:31 PM ] Cadastrando o imóvel: CV0789
+[ 22/09/2023 08:00:32 PM ] Empreendimento: 
+[ 22/09/2023 08:00:32 PM ] Lançamento: Nao
+[ 22/09/2023 08:00:30 PM ] Importando dados do imóvel código: CV0789
+[ 22/09/2023 08:00:29 PM ] Imóvel CV0759 cadastrado com sucesso!
+[ 22/09/2023 08:00:28 PM ] Cadastrando o imóvel: CV0759
+[ 22/09/2023 08:00:28 PM ] Empreendimento: 
+[ 22/09/2023 08:00:28 PM ] Lançamento: Nao
+[ 22/09/2023 08:00:28 PM ] Importando dados do imóvel código: CV0759
+[ 22/09/2023 08:00:27 PM ] Imóvel CV0719 cadastrado com sucesso!
+[ 22/09/2023 08:00:25 PM ] Cadastrando o imóvel: CV0719
+[ 22/09/2023 07:57:51 PM ] Empreendimento: 
+[ 22/09/2023 07:57:51 PM ] Lançamento: Nao
+[ 22/09/2023 07:57:49 PM ] Importando dados do imóvel código: CV0719
+[ 22/09/2023 07:57:48 PM ] Imóvel CV0863 cadastrado com sucesso!
+[ 22/09/2023 07:57:47 PM ] Cadastrando o imóvel: CV0863
+[ 22/09/2023 07:57:47 PM ] Empreendimento: 
+[ 22/09/2023 07:57:47 PM ] Lançamento: Nao
+[ 22/09/2023 07:57:47 PM ] Importando dados do imóvel código: CV0863
+[ 22/09/2023 07:57:46 PM ] Imóvel CV0811 cadastrado com sucesso!
+[ 22/09/2023 07:57:45 PM ] Cadastrando o imóvel: CV0811
+[ 22/09/2023 07:57:45 PM ] Empreendimento: 
+[ 22/09/2023 07:57:45 PM ] Lançamento: Nao
+[ 22/09/2023 07:57:45 PM ] Importando dados do imóvel código: CV0811
+[ 22/09/2023 07:57:44 PM ] Imóvel CV0787 cadastrado com sucesso!
+[ 22/09/2023 07:57:43 PM ] Cadastrando o imóvel: CV0787
+[ 22/09/2023 07:57:43 PM ] Empreendimento: 
+[ 22/09/2023 07:57:43 PM ] Lançamento: Nao
+[ 22/09/2023 07:57:43 PM ] Importando dados do imóvel código: CV0787
+[ 22/09/2023 07:57:42 PM ] Imóvel CV0755 cadastrado com sucesso!
+[ 22/09/2023 07:57:41 PM ] Cadastrando o imóvel: CV0755
+[ 22/09/2023 07:56:42 PM ] Empreendimento: 
+[ 22/09/2023 07:56:42 PM ] Lançamento: Nao
+[ 22/09/2023 07:56:40 PM ] Importando dados do imóvel código: CV0755
+[ 22/09/2023 07:56:39 PM ] Imóvel CV0717 cadastrado com sucesso!
+[ 22/09/2023 07:56:38 PM ] Cadastrando o imóvel: CV0717
+[ 22/09/2023 07:54:36 PM ] Empreendimento: 
+[ 22/09/2023 07:54:36 PM ] Lançamento: Nao
+[ 22/09/2023 07:54:33 PM ] Importando dados do imóvel código: CV0717
+[ 22/09/2023 07:54:32 PM ] Imóvel CV0845 cadastrado com sucesso!
+[ 22/09/2023 07:54:31 PM ] Cadastrando o imóvel: CV0845
+[ 22/09/2023 07:53:23 PM ] Empreendimento: 
+[ 22/09/2023 07:53:23 PM ] Lançamento: Nao
+[ 22/09/2023 07:53:22 PM ] Importando dados do imóvel código: CV0845
+[ 22/09/2023 07:53:21 PM ] Imóvel CV0842 cadastrado com sucesso!
+[ 22/09/2023 07:53:20 PM ] Cadastrando o imóvel: CV0842
+[ 22/09/2023 07:53:20 PM ] Empreendimento: 
+[ 22/09/2023 07:53:20 PM ] Lançamento: Nao
+[ 22/09/2023 07:53:19 PM ] Importando dados do imóvel código: CV0842
+[ 22/09/2023 07:53:18 PM ] Imóvel CV0818 cadastrado com sucesso!
+[ 22/09/2023 07:53:17 PM ] Cadastrando o imóvel: CV0818
+[ 22/09/2023 07:53:02 PM ] Empreendimento: 
+[ 22/09/2023 07:53:02 PM ] Lançamento: Nao
+[ 22/09/2023 07:53:02 PM ] Importando dados do imóvel código: CV0818
+[ 22/09/2023 07:53:01 PM ] Imóvel CV0742 cadastrado com sucesso!
+[ 22/09/2023 07:53:00 PM ] Cadastrando o imóvel: CV0742
+[ 22/09/2023 07:51:45 PM ] Empreendimento: 
+[ 22/09/2023 07:51:45 PM ] Lançamento: Nao
+[ 22/09/2023 07:51:42 PM ] Importando dados do imóvel código: CV0742
+[ 22/09/2023 07:51:41 PM ] Imóvel CV0707 cadastrado com sucesso!
+[ 22/09/2023 07:51:40 PM ] Cadastrando o imóvel: CV0707
+[ 22/09/2023 07:50:27 PM ] Empreendimento: 
+[ 22/09/2023 07:50:27 PM ] Lançamento: Nao
+[ 22/09/2023 07:50:25 PM ] Importando dados do imóvel código: CV0707
+[ 22/09/2023 07:50:24 PM ] Imóvel CV0855 cadastrado com sucesso!
+[ 22/09/2023 07:50:23 PM ] Cadastrando o imóvel: CV0855
+[ 22/09/2023 07:50:23 PM ] Empreendimento: 
+[ 22/09/2023 07:50:23 PM ] Lançamento: Nao
+[ 22/09/2023 07:50:23 PM ] Importando dados do imóvel código: CV0855
+[ 22/09/2023 07:50:22 PM ] Imóvel CV0835 cadastrado com sucesso!
+[ 22/09/2023 07:50:21 PM ] Cadastrando o imóvel: CV0835
+[ 22/09/2023 07:49:39 PM ] Empreendimento: 
+[ 22/09/2023 07:49:39 PM ] Lançamento: Nao
+[ 22/09/2023 07:49:36 PM ] Importando dados do imóvel código: CV0835
+[ 22/09/2023 07:49:35 PM ] Imóvel CV0830 cadastrado com sucesso!
+[ 22/09/2023 07:49:34 PM ] Cadastrando o imóvel: CV0830
+[ 22/09/2023 07:48:41 PM ] Empreendimento: 
+[ 22/09/2023 07:48:41 PM ] Lançamento: Nao
+[ 22/09/2023 07:48:38 PM ] Importando dados do imóvel código: CV0830
+[ 22/09/2023 07:48:37 PM ] Imóvel CV0809 cadastrado com sucesso!
+[ 22/09/2023 07:48:36 PM ] Cadastrando o imóvel: CV0809
+[ 22/09/2023 07:47:45 PM ] Empreendimento: 
+[ 22/09/2023 07:47:45 PM ] Lançamento: Nao
+[ 22/09/2023 07:47:43 PM ] Importando dados do imóvel código: CV0809
+[ 22/09/2023 07:47:42 PM ] Imóvel CV0706 cadastrado com sucesso!
+[ 22/09/2023 07:47:41 PM ] Cadastrando o imóvel: CV0706
+[ 22/09/2023 07:47:41 PM ] Empreendimento: 
+[ 22/09/2023 07:47:41 PM ] Lançamento: Nao
+[ 22/09/2023 07:47:41 PM ] Importando dados do imóvel código: CV0706
+[ 22/09/2023 07:47:40 PM ] Imóvel CV0829 atualizado com sucesso!
+[ 22/09/2023 07:47:40 PM ] Atualizando post 3471 metadata.
+[ 22/09/2023 07:47:40 PM ] Atualizando dados do imóvel: CV0829
+[ 22/09/2023 07:47:39 PM ] Empreendimento: 
+[ 22/09/2023 07:47:39 PM ] Lançamento: Nao
+[ 22/09/2023 07:47:39 PM ] Importando dados do imóvel código: CV0829
+[ 22/09/2023 07:47:38 PM ] Imóvel CV0826 atualizado com sucesso!
+[ 22/09/2023 07:47:38 PM ] Atualizando post 3470 metadata.
+[ 22/09/2023 07:47:38 PM ] Atualizando dados do imóvel: CV0826
+[ 22/09/2023 07:47:38 PM ] Empreendimento: 
+[ 22/09/2023 07:47:38 PM ] Lançamento: Nao
+[ 22/09/2023 07:47:37 PM ] Importando dados do imóvel código: CV0826
+[ 22/09/2023 07:47:36 PM ] Imóvel CV0808 atualizado com sucesso!
+[ 22/09/2023 07:47:36 PM ] Atualizando post 3469 metadata.
+[ 22/09/2023 07:47:36 PM ] Atualizando dados do imóvel: CV0808
+[ 22/09/2023 07:47:36 PM ] Empreendimento: 
+[ 22/09/2023 07:47:36 PM ] Lançamento: Nao
+[ 22/09/2023 07:47:36 PM ] Importando dados do imóvel código: CV0808
+[ 22/09/2023 07:47:35 PM ] Imóvel CV0749 atualizado com sucesso!
+[ 22/09/2023 07:47:35 PM ] Atualizando post 3468 metadata.
+[ 22/09/2023 07:47:34 PM ] Atualizando dados do imóvel: CV0749
+[ 22/09/2023 07:47:34 PM ] Empreendimento: 
+[ 22/09/2023 07:47:34 PM ] Lançamento: Nao
+[ 22/09/2023 07:47:34 PM ] Importando dados do imóvel código: CV0749
+[ 22/09/2023 07:47:33 PM ] Imóvel CV0701 atualizado com sucesso!
+[ 22/09/2023 07:47:33 PM ] Atualizando post 3467 metadata.
+[ 22/09/2023 07:47:33 PM ] Atualizando dados do imóvel: CV0701
+[ 22/09/2023 07:47:33 PM ] Empreendimento: 
+[ 22/09/2023 07:47:33 PM ] Lançamento: Nao
+[ 22/09/2023 07:47:32 PM ] Importando dados do imóvel código: CV0701
+[ 22/09/2023 07:47:31 PM ] Listando imóveis do CRM - página: 235
+[ 22/09/2023 07:47:31 PM ] Listando imóveis do CRM - página: 234
+[ 22/09/2023 07:47:31 PM ] Listando imóveis do CRM - página: 233
+[ 22/09/2023 07:47:31 PM ] Listando imóveis do CRM - página: 232
+[ 22/09/2023 07:47:30 PM ] Listando imóveis do CRM - página: 231
+[ 22/09/2023 07:47:30 PM ] Listando imóveis do CRM - página: 230
+[ 22/09/2023 07:47:30 PM ] Listando imóveis do CRM - página: 229
+[ 22/09/2023 07:47:30 PM ] Listando imóveis do CRM - página: 228
+[ 22/09/2023 07:47:30 PM ] Listando imóveis do CRM - página: 227
+[ 22/09/2023 07:47:29 PM ] Listando imóveis do CRM - página: 226
+[ 22/09/2023 07:47:29 PM ] Listando imóveis do CRM - página: 225
+[ 22/09/2023 07:47:29 PM ] Listando imóveis do CRM - página: 224
+[ 22/09/2023 07:47:29 PM ] Listando imóveis do CRM - página: 223
+[ 22/09/2023 07:47:29 PM ] Listando imóveis do CRM - página: 222
+[ 22/09/2023 07:47:28 PM ] Listando imóveis do CRM - página: 221
+[ 22/09/2023 07:47:28 PM ] Listando imóveis do CRM - página: 220
+[ 22/09/2023 07:47:28 PM ] Listando imóveis do CRM - página: 219
+[ 22/09/2023 07:47:28 PM ] Listando imóveis do CRM - página: 218
+[ 22/09/2023 07:47:28 PM ] Listando imóveis do CRM - página: 217
+[ 22/09/2023 07:47:28 PM ] Listando imóveis do CRM - página: 216
+[ 22/09/2023 07:47:27 PM ] Listando imóveis do CRM - página: 215
+[ 22/09/2023 07:47:27 PM ] Listando imóveis do CRM - página: 214
+[ 22/09/2023 07:47:27 PM ] Listando imóveis do CRM - página: 213
+[ 22/09/2023 07:47:27 PM ] Listando imóveis do CRM - página: 212
+[ 22/09/2023 07:47:27 PM ] Listando imóveis do CRM - página: 211
+[ 22/09/2023 07:47:26 PM ] Listando imóveis do CRM - página: 210
+[ 22/09/2023 07:47:26 PM ] Listando imóveis do CRM - página: 209
+[ 22/09/2023 07:47:26 PM ] Listando imóveis do CRM - página: 208
+[ 22/09/2023 07:47:26 PM ] Listando imóveis do CRM - página: 207
+[ 22/09/2023 07:47:26 PM ] Listando imóveis do CRM - página: 206
+[ 22/09/2023 07:47:26 PM ] Listando imóveis do CRM - página: 205
+[ 22/09/2023 07:47:25 PM ] Listando imóveis do CRM - página: 204
+[ 22/09/2023 07:47:25 PM ] Listando imóveis do CRM - página: 203
+[ 22/09/2023 07:47:25 PM ] Listando imóveis do CRM - página: 202
+[ 22/09/2023 07:47:25 PM ] Listando imóveis do CRM - página: 201
+[ 22/09/2023 07:47:25 PM ] Listando imóveis do CRM - página: 200
+[ 22/09/2023 07:47:24 PM ] Listando imóveis do CRM - página: 199
+[ 22/09/2023 07:47:24 PM ] Listando imóveis do CRM - página: 198
+[ 22/09/2023 07:47:24 PM ] Listando imóveis do CRM - página: 197
+[ 22/09/2023 07:47:24 PM ] Listando imóveis do CRM - página: 196
+[ 22/09/2023 07:47:24 PM ] Listando imóveis do CRM - página: 195
+[ 22/09/2023 07:47:23 PM ] Listando imóveis do CRM - página: 194
+[ 22/09/2023 07:47:23 PM ] Listando imóveis do CRM - página: 193
+[ 22/09/2023 07:47:23 PM ] Listando imóveis do CRM - página: 192
+[ 22/09/2023 07:47:23 PM ] Listando imóveis do CRM - página: 191
+[ 22/09/2023 07:47:23 PM ] Listando imóveis do CRM - página: 190
+[ 22/09/2023 07:47:22 PM ] Listando imóveis do CRM - página: 189
+[ 22/09/2023 07:47:22 PM ] Listando imóveis do CRM - página: 188
+[ 22/09/2023 07:47:22 PM ] Listando imóveis do CRM - página: 187
+[ 22/09/2023 07:47:22 PM ] Listando imóveis do CRM - página: 186
+[ 22/09/2023 07:47:22 PM ] Listando imóveis do CRM - página: 185
+[ 22/09/2023 07:47:22 PM ] Listando imóveis do CRM - página: 184
+[ 22/09/2023 07:47:21 PM ] Listando imóveis do CRM - página: 183
+[ 22/09/2023 07:47:21 PM ] Listando imóveis do CRM - página: 182
+[ 22/09/2023 07:47:21 PM ] Listando imóveis do CRM - página: 181
+[ 22/09/2023 07:47:21 PM ] Listando imóveis do CRM - página: 180
+[ 22/09/2023 07:47:21 PM ] Listando imóveis do CRM - página: 179
+[ 22/09/2023 07:47:21 PM ] Listando imóveis do CRM - página: 178
+[ 22/09/2023 07:47:20 PM ] Listando imóveis do CRM - página: 177
+[ 22/09/2023 07:47:20 PM ] Listando imóveis do CRM - página: 176
+[ 22/09/2023 07:47:20 PM ] Listando imóveis do CRM - página: 175
+[ 22/09/2023 07:47:20 PM ] Listando imóveis do CRM - página: 174
+[ 22/09/2023 07:47:20 PM ] Listando imóveis do CRM - página: 173
+[ 22/09/2023 07:47:19 PM ] Listando imóveis do CRM - página: 172
+[ 22/09/2023 07:47:19 PM ] Listando imóveis do CRM - página: 171
+[ 22/09/2023 07:47:19 PM ] Listando imóveis do CRM - página: 170
+[ 22/09/2023 07:47:19 PM ] Listando imóveis do CRM - página: 169
+[ 22/09/2023 07:47:19 PM ] Listando imóveis do CRM - página: 168
+[ 22/09/2023 07:47:19 PM ] Listando imóveis do CRM - página: 167
+[ 22/09/2023 07:47:18 PM ] Listando imóveis do CRM - página: 166
+[ 22/09/2023 07:47:18 PM ] Listando imóveis do CRM - página: 165
+[ 22/09/2023 07:47:18 PM ] Listando imóveis do CRM - página: 164
+[ 22/09/2023 07:47:18 PM ] Listando imóveis do CRM - página: 163
+[ 22/09/2023 07:47:18 PM ] Listando imóveis do CRM - página: 162
+[ 22/09/2023 07:47:17 PM ] Listando imóveis do CRM - página: 161
+[ 22/09/2023 07:47:17 PM ] Listando imóveis do CRM - página: 160
+[ 22/09/2023 07:47:17 PM ] Listando imóveis do CRM - página: 159
+[ 22/09/2023 07:47:17 PM ] Listando imóveis do CRM - página: 158
+[ 22/09/2023 07:47:17 PM ] Listando imóveis do CRM - página: 157
+[ 22/09/2023 07:47:17 PM ] Listando imóveis do CRM - página: 156
+[ 22/09/2023 07:47:16 PM ] Listando imóveis do CRM - página: 155
+[ 22/09/2023 07:47:16 PM ] Listando imóveis do CRM - página: 154
+[ 22/09/2023 07:47:16 PM ] Listando imóveis do CRM - página: 153
+[ 22/09/2023 07:47:16 PM ] Listando imóveis do CRM - página: 152
+[ 22/09/2023 07:47:16 PM ] Listando imóveis do CRM - página: 151
+[ 22/09/2023 07:47:15 PM ] Listando imóveis do CRM - página: 150
+[ 22/09/2023 07:47:15 PM ] Listando imóveis do CRM - página: 149
+[ 22/09/2023 07:47:15 PM ] Listando imóveis do CRM - página: 148
+[ 22/09/2023 07:47:15 PM ] Listando imóveis do CRM - página: 147
+[ 22/09/2023 07:47:15 PM ] Listando imóveis do CRM - página: 146
+[ 22/09/2023 07:47:14 PM ] Listando imóveis do CRM - página: 145
+[ 22/09/2023 07:47:14 PM ] Listando imóveis do CRM - página: 144
+[ 22/09/2023 07:47:14 PM ] Listando imóveis do CRM - página: 143
+[ 22/09/2023 07:47:14 PM ] Listando imóveis do CRM - página: 142
+[ 22/09/2023 07:47:14 PM ] Listando imóveis do CRM - página: 141
+[ 22/09/2023 07:47:14 PM ] Listando imóveis do CRM - página: 140
+[ 22/09/2023 07:47:13 PM ] Listando imóveis do CRM - página: 139
+[ 22/09/2023 07:47:13 PM ] Listando imóveis do CRM - página: 138
+[ 22/09/2023 07:47:13 PM ] Listando imóveis do CRM - página: 137
+[ 22/09/2023 07:47:13 PM ] Listando imóveis do CRM - página: 136
+[ 22/09/2023 07:47:13 PM ] Listando imóveis do CRM - página: 135
+[ 22/09/2023 07:47:12 PM ] Listando imóveis do CRM - página: 134
+[ 22/09/2023 07:47:12 PM ] Listando imóveis do CRM - página: 133
+[ 22/09/2023 07:47:12 PM ] Listando imóveis do CRM - página: 132
+[ 22/09/2023 07:47:12 PM ] Listando imóveis do CRM - página: 131
+[ 22/09/2023 07:47:12 PM ] Listando imóveis do CRM - página: 130
+[ 22/09/2023 07:47:11 PM ] Listando imóveis do CRM - página: 129
+[ 22/09/2023 07:47:11 PM ] Listando imóveis do CRM - página: 128
+[ 22/09/2023 07:47:11 PM ] Listando imóveis do CRM - página: 127
+[ 22/09/2023 07:47:11 PM ] Listando imóveis do CRM - página: 126
+[ 22/09/2023 07:47:11 PM ] Listando imóveis do CRM - página: 125
+[ 22/09/2023 07:47:11 PM ] Listando imóveis do CRM - página: 124
+[ 22/09/2023 07:47:10 PM ] Listando imóveis do CRM - página: 123
+[ 22/09/2023 07:47:10 PM ] Listando imóveis do CRM - página: 122
+[ 22/09/2023 07:47:10 PM ] Listando imóveis do CRM - página: 121
+[ 22/09/2023 07:47:10 PM ] Listando imóveis do CRM - página: 120
+[ 22/09/2023 07:47:10 PM ] Listando imóveis do CRM - página: 119
+[ 22/09/2023 07:47:09 PM ] Listando imóveis do CRM - página: 118
+[ 22/09/2023 07:47:09 PM ] Listando imóveis do CRM - página: 117
+[ 22/09/2023 07:47:09 PM ] Listando imóveis do CRM - página: 116
+[ 22/09/2023 07:47:09 PM ] Listando imóveis do CRM - página: 115
+[ 22/09/2023 07:47:09 PM ] Listando imóveis do CRM - página: 114
+[ 22/09/2023 07:47:09 PM ] Listando imóveis do CRM - página: 113
+[ 22/09/2023 07:47:08 PM ] Listando imóveis do CRM - página: 112
+[ 22/09/2023 07:47:08 PM ] Listando imóveis do CRM - página: 111
+[ 22/09/2023 07:47:08 PM ] Listando imóveis do CRM - página: 110
+[ 22/09/2023 07:47:08 PM ] Listando imóveis do CRM - página: 109
+[ 22/09/2023 07:47:08 PM ] Listando imóveis do CRM - página: 108
+[ 22/09/2023 07:47:07 PM ] Listando imóveis do CRM - página: 107
+[ 22/09/2023 07:47:07 PM ] Listando imóveis do CRM - página: 106
+[ 22/09/2023 07:47:07 PM ] Listando imóveis do CRM - página: 105
+[ 22/09/2023 07:47:07 PM ] Listando imóveis do CRM - página: 104
+[ 22/09/2023 07:47:07 PM ] Listando imóveis do CRM - página: 103
+[ 22/09/2023 07:47:07 PM ] Listando imóveis do CRM - página: 102
+[ 22/09/2023 07:47:06 PM ] Listando imóveis do CRM - página: 101
+[ 22/09/2023 07:47:06 PM ] Listando imóveis do CRM - página: 100
+[ 22/09/2023 07:47:06 PM ] Listando imóveis do CRM - página: 99
+[ 22/09/2023 07:47:06 PM ] Listando imóveis do CRM - página: 98
+[ 22/09/2023 07:47:06 PM ] Listando imóveis do CRM - página: 97
+[ 22/09/2023 07:47:05 PM ] Listando imóveis do CRM - página: 96
+[ 22/09/2023 07:47:05 PM ] Listando imóveis do CRM - página: 95
+[ 22/09/2023 07:47:05 PM ] Listando imóveis do CRM - página: 94
+[ 22/09/2023 07:47:05 PM ] Listando imóveis do CRM - página: 93
+[ 22/09/2023 07:47:05 PM ] Listando imóveis do CRM - página: 92
+[ 22/09/2023 07:47:05 PM ] Listando imóveis do CRM - página: 91
+[ 22/09/2023 07:47:04 PM ] Listando imóveis do CRM - página: 90
+[ 22/09/2023 07:47:04 PM ] Listando imóveis do CRM - página: 89
+[ 22/09/2023 07:47:04 PM ] Listando imóveis do CRM - página: 88
+[ 22/09/2023 07:47:04 PM ] Listando imóveis do CRM - página: 87
+[ 22/09/2023 07:47:03 PM ] Listando imóveis do CRM - página: 86
+[ 22/09/2023 07:47:03 PM ] Listando imóveis do CRM - página: 85
+[ 22/09/2023 07:47:03 PM ] Listando imóveis do CRM - página: 84
+[ 22/09/2023 07:47:03 PM ] Listando imóveis do CRM - página: 83
+[ 22/09/2023 07:47:03 PM ] Listando imóveis do CRM - página: 82
+[ 22/09/2023 07:47:02 PM ] Listando imóveis do CRM - página: 81
+[ 22/09/2023 07:47:02 PM ] Listando imóveis do CRM - página: 80
+[ 22/09/2023 07:47:02 PM ] Listando imóveis do CRM - página: 79
+[ 22/09/2023 07:47:02 PM ] Listando imóveis do CRM - página: 78
+[ 22/09/2023 07:47:02 PM ] Listando imóveis do CRM - página: 77
+[ 22/09/2023 07:47:02 PM ] Listando imóveis do CRM - página: 76
+[ 22/09/2023 07:47:01 PM ] Listando imóveis do CRM - página: 75
+[ 22/09/2023 07:47:01 PM ] Listando imóveis do CRM - página: 74
+[ 22/09/2023 07:47:01 PM ] Listando imóveis do CRM - página: 73
+[ 22/09/2023 07:47:01 PM ] Listando imóveis do CRM - página: 72
+[ 22/09/2023 07:47:01 PM ] Listando imóveis do CRM - página: 71
+[ 22/09/2023 07:47:01 PM ] Listando imóveis do CRM - página: 70
+[ 22/09/2023 07:47:00 PM ] Listando imóveis do CRM - página: 69
+[ 22/09/2023 07:47:00 PM ] Listando imóveis do CRM - página: 68
+[ 22/09/2023 07:47:00 PM ] Listando imóveis do CRM - página: 67
+[ 22/09/2023 07:47:00 PM ] Listando imóveis do CRM - página: 66
+[ 22/09/2023 07:47:00 PM ] Listando imóveis do CRM - página: 65
+[ 22/09/2023 07:47:00 PM ] Listando imóveis do CRM - página: 64
+[ 22/09/2023 07:46:59 PM ] Listando imóveis do CRM - página: 63
+[ 22/09/2023 07:46:59 PM ] Listando imóveis do CRM - página: 62
+[ 22/09/2023 07:46:59 PM ] Listando imóveis do CRM - página: 61
+[ 22/09/2023 07:46:59 PM ] Listando imóveis do CRM - página: 60
+[ 22/09/2023 07:46:59 PM ] Listando imóveis do CRM - página: 59
+[ 22/09/2023 07:46:59 PM ] Listando imóveis do CRM - página: 58
+[ 22/09/2023 07:46:58 PM ] Listando imóveis do CRM - página: 57
+[ 22/09/2023 07:46:58 PM ] Listando imóveis do CRM - página: 56
+[ 22/09/2023 07:46:58 PM ] Listando imóveis do CRM - página: 55
+[ 22/09/2023 07:46:58 PM ] Listando imóveis do CRM - página: 54
+[ 22/09/2023 07:46:58 PM ] Listando imóveis do CRM - página: 53
+[ 22/09/2023 07:46:58 PM ] Listando imóveis do CRM - página: 52
+[ 22/09/2023 07:46:57 PM ] Listando imóveis do CRM - página: 51
+[ 22/09/2023 07:46:57 PM ] Listando imóveis do CRM - página: 50
+[ 22/09/2023 07:46:57 PM ] Listando imóveis do CRM - página: 49
+[ 22/09/2023 07:46:57 PM ] Listando imóveis do CRM - página: 48
+[ 22/09/2023 07:46:57 PM ] Listando imóveis do CRM - página: 47
+[ 22/09/2023 07:46:56 PM ] Listando imóveis do CRM - página: 46
+[ 22/09/2023 07:46:56 PM ] Listando imóveis do CRM - página: 45
+[ 22/09/2023 07:46:56 PM ] Listando imóveis do CRM - página: 44
+[ 22/09/2023 07:46:56 PM ] Listando imóveis do CRM - página: 43
+[ 22/09/2023 07:46:56 PM ] Listando imóveis do CRM - página: 42
+[ 22/09/2023 07:46:56 PM ] Listando imóveis do CRM - página: 41
+[ 22/09/2023 07:46:55 PM ] Listando imóveis do CRM - página: 40
+[ 22/09/2023 07:46:55 PM ] Listando imóveis do CRM - página: 39
+[ 22/09/2023 07:46:55 PM ] Listando imóveis do CRM - página: 38
+[ 22/09/2023 07:46:55 PM ] Listando imóveis do CRM - página: 37
+[ 22/09/2023 07:46:55 PM ] Listando imóveis do CRM - página: 36
+[ 22/09/2023 07:46:55 PM ] Listando imóveis do CRM - página: 35
+[ 22/09/2023 07:46:54 PM ] Listando imóveis do CRM - página: 34
+[ 22/09/2023 07:46:54 PM ] Listando imóveis do CRM - página: 33
+[ 22/09/2023 07:46:54 PM ] Listando imóveis do CRM - página: 32
+[ 22/09/2023 07:46:54 PM ] Listando imóveis do CRM - página: 31
+[ 22/09/2023 07:46:54 PM ] Listando imóveis do CRM - página: 30
+[ 22/09/2023 07:46:54 PM ] Listando imóveis do CRM - página: 29
+[ 22/09/2023 07:46:53 PM ] Listando imóveis do CRM - página: 28
+[ 22/09/2023 07:46:53 PM ] Listando imóveis do CRM - página: 27
+[ 22/09/2023 07:46:53 PM ] Listando imóveis do CRM - página: 26
+[ 22/09/2023 07:46:53 PM ] Listando imóveis do CRM - página: 25
+[ 22/09/2023 07:46:53 PM ] Listando imóveis do CRM - página: 24
+[ 22/09/2023 07:46:53 PM ] Listando imóveis do CRM - página: 23
+[ 22/09/2023 07:46:52 PM ] Listando imóveis do CRM - página: 22
+[ 22/09/2023 07:46:52 PM ] Listando imóveis do CRM - página: 21
+[ 22/09/2023 07:46:52 PM ] Listando imóveis do CRM - página: 20
+[ 22/09/2023 07:46:52 PM ] Listando imóveis do CRM - página: 19
+[ 22/09/2023 07:46:52 PM ] Listando imóveis do CRM - página: 18
+[ 22/09/2023 07:46:52 PM ] Listando imóveis do CRM - página: 17
+[ 22/09/2023 07:46:51 PM ] Listando imóveis do CRM - página: 16
+[ 22/09/2023 07:46:51 PM ] Listando imóveis do CRM - página: 15
+[ 22/09/2023 07:46:51 PM ] Listando imóveis do CRM - página: 14
+[ 22/09/2023 07:46:51 PM ] Listando imóveis do CRM - página: 13
+[ 22/09/2023 07:46:51 PM ] Listando imóveis do CRM - página: 12
+[ 22/09/2023 07:46:50 PM ] Listando imóveis do CRM - página: 11
+[ 22/09/2023 07:46:50 PM ] Listando imóveis do CRM - página: 10
+[ 22/09/2023 07:46:50 PM ] Listando imóveis do CRM - página: 9
+[ 22/09/2023 07:46:50 PM ] Listando imóveis do CRM - página: 8
+[ 22/09/2023 07:46:50 PM ] Listando imóveis do CRM - página: 7
+[ 22/09/2023 07:46:50 PM ] Listando imóveis do CRM - página: 6
+[ 22/09/2023 07:46:49 PM ] Listando imóveis do CRM - página: 5
+[ 22/09/2023 07:46:49 PM ] Listando imóveis do CRM - página: 4
+[ 22/09/2023 07:46:49 PM ] Listando imóveis do CRM - página: 3
+[ 22/09/2023 07:46:49 PM ] Listando imóveis do CRM - página: 2
+[ 22/09/2023 07:46:49 PM ] Listando imóveis do CRM - página: 1

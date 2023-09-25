@@ -23,6 +23,7 @@ class OptionManager
 	{
 		if( is_bool( get_option(self::OPTIONS_NAME) ) ) {
 			update_option( self::OPTIONS_NAME, [
+				'auto'			=> false,
 				'fields'		=> $this->fieldsOptions(),
 				'post_type'		=> PropertiesManager::POSTTYPE,
 				'features'		=> $this->featuresOptions(),
@@ -39,6 +40,7 @@ class OptionManager
 	public static function initialize()
 	{
 		update_option( self::OPTIONS_NAME, [
+			'auto'			=> false,
 			'fields'		=> ( new OptionManager )->fieldsOptions(),
 			'post_type'		=> PropertiesManager::POSTTYPE,
 			'features'		=> ( new OptionManager )->featuresOptions(),
@@ -51,7 +53,6 @@ class OptionManager
 
 	public function getFieldsMapping(): array
 	{
-		//return $this->options['fields'];
 		return $this->fieldsOptions();
 	}
 
@@ -60,57 +61,56 @@ class OptionManager
 		return $this->cronOptions['next'];
 	}
 
-	public function updateCronOptions( $total )
+	public function toggleAuto()
 	{
-		if( $this->cronOptions['next'] >= $total ) {
-			$this->cronOptions['next'] = 1;
+		if( isset( $this->options['auto'] )) {
+			$this->options['auto'] = ! $this->options['auto'];
 		} else {
-			$this->cronOptions['next'] = $this->cronOptions['next'] + 1;
+			$this->options['auto'] = false;
 		}
-		$this->cronOptions['total'] = $total;
-		update_option(self::OPTIONS_CRON, $this->cronOptions);
+		update_option( self::OPTIONS_NAME, $this->options );
 	}
 
 	private function fieldsOptions(): array
 	{
 		return [
-			[ "crm" => "TituloSite", "jet" => "nome", "required" => "true" ],
-			[ "crm" => "DescricaoWeb", "jet" => "descricao-do-imovel", "required" => "true" ],
-			[ "crm" => "Codigo", "jet" => "codigo", "required" => "true" ],
-			[ "crm" => "ValorVenda", "jet" => "valor-da-venda", "required" => "true" ],
-			[ "crm" => "ValorLocacao", "jet" => "valor-da-locacao", "required" => "true" ],
-			[ "crm" => "ValorCondominio", "jet" => "valor_condominio", "required" => "true" ],
-			[ "crm" => "ValorIptu", "jet" => "valor-iptu", "required" => "true" ],
-			[ "crm" => "FotoDestaque", "jet" => "imagem-principal", "required" => "true" ],
-			[ "crm" => "Foto", "jet" => "galeria-de-imagens", "required" => "true" ],
-			[ "crm" => "CategoriaImovel", "jet" => "categoria", "required" => "true" ],
-			[ "crm" => "Lancamento", "jet" => "lancamento", "required" => "true" ],
-			[ "crm" => "ExibirNoSite", "jet" => "exibir-no-site", "required" => "true" ],
-			[ "crm" => "DestaqueWeb", "jet" => "mostrarnahome", "required" => "true" ],
-			[ "crm" => "AreaTotal", "jet" => "areatotal", "required" => "true" ],
-			[ "crm" => "AreaPrivativa", "jet" => "area-privativa", "required" => "true" ],
-			[ "crm" => "Dormitorios", "jet" => "dormitorios", "required" => "true" ],
-			[ "crm" => "Suites", "jet" => "suites", "required" => "true" ],
-			[ "crm" => "Vagas", "jet" => "vagas", "required" => "true" ],
-			[ "crm" => "Bairro", "jet" => "bairro", "required" => "true" ],
-			[ "crm" => "Cidade", "jet" => "cidade", "required" => "true" ],
-			[ "crm" => "UF", "jet" => "uf", "required" => "true" ],
-			[ "crm" => "Elemento", "jet" => "elemento", "required" => "true" ],
-			[ "crm" => "Status", "jet" => "status", "required" => "true" ],
-			[ "crm" => "ValorDiaria", "jet" => "valor-diaria", "required" => "true" ],
-			[ "crm" => "Caracteristicas", "jet" => "caracteristicas", "required" => "true" ],
-			[ "crm" => "InfraEstrutura", "jet" => "infraestrutura", "required" => "true" ],
-			[ "crm" => "Empreendimento", "jet" => "empreendimento", "required" => "true" ],
-			[ "crm" => "Latitude", "jet" => "latitude", "required" => "true" ],
-			[ "crm" => "Longitude", "jet" => "longitude", "required" => "true" ],
-			[ "crm" => "Categoria", "jet" => "tipoimovel", "required" => "true" ],
-			[ "crm" => "QuantidadeMotor", "jet" => "quantidademotor", "required" => "true" ],
-			[ "crm" => "Motor", "jet" => "motor", "required" => "true" ],
-			[ "crm" => "ModeloMotor", "jet" => "modelomotor", "required" => "true" ],
-			[ "crm" => "Hp", "jet" => "hp", "required" => "true" ],
-			[ "crm" => "Combustivel", "jet" => "combustivel", "required" => "true" ],
-			[ "crm" => "Pes", "jet" => "pes", "required" => "true" ],
-			[ "crm" => "URLVideo", "jet" => "video", "required" => "true" ],
+			[ "crm" => "TituloSite", "jet" => "nome" ],
+			[ "crm" => "DescricaoWeb", "jet" => "descricao-do-imovel" ],
+			[ "crm" => "Codigo", "jet" => "codigo" ],
+			[ "crm" => "ValorVenda", "jet" => "valor-da-venda" ],
+			[ "crm" => "ValorLocacao", "jet" => "valor-da-locacao" ],
+			[ "crm" => "ValorCondominio", "jet" => "valor_condominio" ],
+			[ "crm" => "ValorIptu", "jet" => "valor-iptu" ],
+			[ "crm" => "FotoDestaque", "jet" => "imagem-principal" ],
+			[ "crm" => "Foto", "jet" => "galeria-de-imagens" ],
+			[ "crm" => "CategoriaImovel", "jet" => "categoria" ],
+			[ "crm" => "Lancamento", "jet" => "lancamento" ],
+			[ "crm" => "ExibirNoSite", "jet" => "exibir-no-site" ],
+			[ "crm" => "DestaqueWeb", "jet" => "mostrarnahome" ],
+			[ "crm" => "AreaTotal", "jet" => "areatotal" ],
+			[ "crm" => "AreaPrivativa", "jet" => "area-privativa" ],
+			[ "crm" => "Dormitorios", "jet" => "dormitorios" ],
+			[ "crm" => "Suites", "jet" => "suites" ],
+			[ "crm" => "Vagas", "jet" => "vagas" ],
+			[ "crm" => "Bairro", "jet" => "bairro" ],
+			[ "crm" => "Cidade", "jet" => "cidade" ],
+			[ "crm" => "UF", "jet" => "uf" ],
+			[ "crm" => "Elemento", "jet" => "elemento" ],
+			[ "crm" => "Status", "jet" => "status" ],
+			[ "crm" => "ValorDiaria", "jet" => "valor-diaria" ],
+			[ "crm" => "Caracteristicas", "jet" => "caracteristicas" ],
+			[ "crm" => "InfraEstrutura", "jet" => "infraestrutura" ],
+			[ "crm" => "Empreendimento", "jet" => "empreendimento" ],
+			[ "crm" => "Latitude", "jet" => "latitude" ],
+			[ "crm" => "Longitude", "jet" => "longitude" ],
+			[ "crm" => "Categoria", "jet" => "tipoimovel" ],
+			[ "crm" => "QuantidadeMotor", "jet" => "quantidademotor" ],
+			[ "crm" => "Motor", "jet" => "motor" ],
+			[ "crm" => "ModeloMotor", "jet" => "modelomotor" ],
+			[ "crm" => "Hp", "jet" => "hp" ],
+			[ "crm" => "Combustivel", "jet" => "combustivel" ],
+			[ "crm" => "Pes", "jet" => "pes" ],
+			[ "crm" => "URLVideo", "jet" => "video" ],
 			[ "crm" => "APartirDe", "jet" => "apartirde", ],
 			[ "crm" => "SobConsulta", "jet" => "sobconsulta", ],
 			[ "crm" => "AreaUtil", "jet" => "areautil", ],

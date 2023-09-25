@@ -2,7 +2,7 @@
 
 namespace G28\VistasoftMonitor\Core;
 
-use G28\VistasoftMonitor\VistaSoft\PropertyDAO;
+use G28\VistasoftMonitor\VistaSoft\PropertiesManager;
 
 class TermTaxonomies {
 
@@ -25,7 +25,7 @@ class TermTaxonomies {
 	{
 		$ids = [];
 		if( !is_null( $this->state )) {
-			register_taxonomy( self::TAXONOMY_STATE_CITY, [ PropertyDAO::POSTTYPE, PropertyDAO::BOATTYPE]);
+			register_taxonomy( self::TAXONOMY_STATE_CITY, [ PropertiesManager::POSTTYPE, PropertiesManager::BOATTYPE]);
 			$stateId   = $this->setTermData( $this->state );
 			$ids[] = $stateId;
 			$cityId    = $this->setTermData( $this->city, intval( $stateId ) );
