@@ -7,16 +7,16 @@ use G28\VistasoftMonitor\VistaSoft\PropertiesManager;
 class OptionManager
 {
     const OPTIONS_NAME      = 'g28-vistasoft-monitor_options';
-	const OPTIONS_CRON      = 'g28-vistasoft-monitor_g28-cron-next-page';
+	const OPTIONS_PROCESS      = 'g28-vistasoft-monitor-process-next-page';
 
 	private $options;
-	private $cronOptions;
+	private $processOptions;
 
 	public function __construct()
 	{
 		$this->normalizeOptions();
-		$this->options          = get_option(self::OPTIONS_NAME);
-		$this->cronOptions      = get_option(self::OPTIONS_CRON);
+		$this->options        = get_option(self::OPTIONS_NAME);
+		$this->processOptions = get_option(self::OPTIONS_PROCESS);
 	}
 
 	private function normalizeOptions()
@@ -29,8 +29,8 @@ class OptionManager
 				'features'		=> $this->featuresOptions(),
 			 ] );
 		}
-		if( is_bool( get_option( self::OPTIONS_CRON ) ) ) {
-			update_option(self::OPTIONS_CRON, [
+		if( is_bool( get_option( self::OPTIONS_PROCESS ) ) ) {
+			update_option(self::OPTIONS_PROCESS, [
 				'next'          => 1,
 				'total'         => 1
 			]);
@@ -45,7 +45,7 @@ class OptionManager
 			'post_type'		=> PropertiesManager::POSTTYPE,
 			'features'		=> ( new OptionManager )->featuresOptions(),
 		]);
-		update_option(self::OPTIONS_CRON, [
+		update_option(self::OPTIONS_PROCESS, [
 			'next'          => 1,
 			'total'         => 1
 		]);
@@ -58,7 +58,7 @@ class OptionManager
 
 	public function getNextPage()
 	{
-		return $this->cronOptions['next'];
+		return $this->processOptions['next'];
 	}
 
 	public function toggleAuto()
@@ -73,6 +73,9 @@ class OptionManager
 
 	public function getAuto(): bool
 	{
+		if( !isset( $this->options['auto'] ) ) {
+			self::initialize();
+		}
 		return $this->options['auto'];
 	}
 

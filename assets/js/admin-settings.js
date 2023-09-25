@@ -6,7 +6,7 @@
 		loading.show()
 		const logInterval = setInterval(() => {
 			getLogContent()
-		}, 3000);
+		}, 10000);
 		let params = {
 			action: ajaxobj.action_Process,
 			nonce: ajaxobj.g28_vistasoft_monitor_nonce,

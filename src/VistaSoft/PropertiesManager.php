@@ -48,7 +48,7 @@ class PropertiesManager
 	{
 		$this->doImports();
 		foreach ($codes as $code) {
-			sleep(3);
+			sleep(2);
 			$exibir 	= $code['exibir'];
 			$codigo 	= $code['codigo'];
 			try {
@@ -94,7 +94,7 @@ class PropertiesManager
 		}
 	}
 
-	private function updateDatabaseContent($values, $code, $terms = [], $isEnterprise = false)
+	private function updateDatabaseContent($values, $code, $terms = [])
 	{
 		$post = $this->getPostByMetaCode($code);
 		list($title, $type) = $this->checkIfEmbarcacao($values);
@@ -167,7 +167,7 @@ class PropertiesManager
 					if ($key === "Lancamento") {
 						Logger::getInstance()->add("Lançamento: " . $value);
 						$isEnterprise = $value === "Sim";
-						Logger::getInstance()->add("Empreendimento: " . $isEnterprise);
+						//Logger::getInstance()->add("Empreendimento: " . $isEnterprise);
 					}
 
 					$fields[$idx] = $value === "Sim" ? "true" : "false";

@@ -3,6 +3,7 @@
 namespace G28\VistasoftMonitor\VistaSoft;
 
 use G28\VistasoftMonitor\Core\Logger;
+use G28\VistasoftMonitor\Core\OptionManager;
 
 class Client
 {
@@ -41,10 +42,6 @@ class Client
 		Logger::getInstance()->clear();
 	    $items = $this->requestPage(1);
 	    $this->walkThrough( $items );
-	    for( $page = 2; $page <= $items->paginas; $page++ ) {
-		    $items = $this->requestPage( $page );
-		    $this->walkThrough( $items );
-	    }
 	    $manager = new PropertiesManager();
 	    $manager->run( $this->codesQueue );
     }

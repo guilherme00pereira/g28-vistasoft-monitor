@@ -53,7 +53,7 @@ class CRMFields
 		return json_encode( [
 			"fields"    => ["ExibirNoSite"],
 			"filter"    => [],
-			"paginacao" => [ "pagina" => $page, "quantidade" => 5 ]
+			"paginacao" => [ "pagina" => $page, "quantidade" => 50 ]
 		] );
 	}
 
