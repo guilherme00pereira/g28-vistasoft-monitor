@@ -71,6 +71,11 @@ class OptionManager
 		update_option( self::OPTIONS_NAME, $this->options );
 	}
 
+	public function getAuto(): bool
+	{
+		return $this->options['auto'];
+	}
+
 	private function fieldsOptions(): array
 	{
 		return [

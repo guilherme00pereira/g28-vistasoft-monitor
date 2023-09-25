@@ -3,6 +3,7 @@
 namespace G28\VistasoftMonitor;
 
 
+use G28\VistasoftMonitor\Core\OptionManager;
 use G28\VistasoftMonitor\Core\Plugin;
 
 if( !function_exists( __NAMESPACE__ . 'runPlugin') )
@@ -13,6 +14,7 @@ if( !function_exists( __NAMESPACE__ . 'runPlugin') )
 	        Plugin::getInstance( $root );
 	        add_filter( 'plugin_action_links_' . Plugin::getPluginBase(), __NAMESPACE__ . '\settings_link' );
             new Controller();
+			new OptionManager();
         } );
     }
 }

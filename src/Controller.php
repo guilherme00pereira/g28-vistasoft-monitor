@@ -3,11 +3,11 @@
 namespace G28\VistasoftMonitor;
 
 use Exception;
+use G28\VistasoftMonitor\Core\CronEvent;
 use G28\VistasoftMonitor\VistaSoft\Client;
 use G28\VistasoftMonitor\Core\Logger;
 use G28\VistasoftMonitor\Core\OptionManager;
 use G28\VistasoftMonitor\Core\Plugin;
-use G28\VistasoftMonitor\VistaSoft\PropertiesManager;
 
 class Controller
 {
@@ -78,6 +78,8 @@ class Controller
 		try {
 			$optionManager = new OptionManager();
 			$optionManager->toggleAuto();
+			$auto = $_POST['auto'];
+			$auto === "1" ? CronEvent::getInstance()->activate() : CronEvent::getInstance()->deactivate();
 			echo json_encode(['success' => true, 'message' => '']);
 		} catch (Exception $e) {
 			echo json_encode(['error' => false, 'message' => 'Erro ao abrir arquivo de log.']);
@@ -100,6 +102,8 @@ class Controller
 			'g28_vistasoft_monitor_nonce'	=> wp_create_nonce( 'g28_vistasoft_monitor_nonce' ),
 			'action_Process'                 => 'process',
 			'action_ReadLog'                 => 'readLog',
+			'action_toggleAuto'              => 'toggleAuto',
+			'autoProcess'                          => ( new OptionManager() )->getAuto(),
 		]);
 	}
 
