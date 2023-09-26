@@ -2,7 +2,7 @@
 /*
 Plugin Name: G28 VistaSoft Monitor
 Description: Monitoramento de imóveis da VistaSoft
-Version: 1.0.1
+Version: 1.0.2
 Author: G28 - Guilherme Pereira
 Namespace: G28\VistasoftMonitor
 */
