@@ -17,10 +17,12 @@ class PropertiesManager
 	const POSTTYPE = 'imovel';
 	const BOATTYPE = 'embarcacao';
 	private array $dbKeys;
+	private OptionManager $options;
 
 	public function __construct()
 	{
 		$this->dbKeys = $this->getIdsFromDB();
+		$this->options = new OptionManager();
 	}
 
 	private function doImports()
@@ -55,12 +57,14 @@ class PropertiesManager
 				if ( $exibir !== "Sim") {
 					Logger::getInstance()->add("Imóvel: " . $codigo . " não deve ser exibido no site");
 					$this->remove($codigo);
+					$this->options->setExcluded($codigo);
 				} else {
 					$client = new Client();
 					$data = $client->getRealStateData($codigo);
 					[$meta_values, $terms] = $this->mapColumns($data);
 					if (in_array($codigo, $this->dbKeys)) {
 						Logger::getInstance()->add("Atualizando dados do imóvel: " . $codigo);
+
 					} else {
 						Logger::getInstance()->add("Cadastrando o imóvel: " . $codigo);
 					}
@@ -106,7 +110,7 @@ class PropertiesManager
 				'post_status' => 'publish',
 				'post_type' => $type
 			]);
-			
+			$this->options->setAdded($code);
 			foreach ($values as $key => $value) {
 				add_post_meta($post, $key, $value);
 				if (count($terms) > 0) {
@@ -122,6 +126,7 @@ class PropertiesManager
 				'post_status' => 'publish',
 				'post_type' => $type
 			]);
+			$this->options->setUpdated($code);
 			foreach ($values as $key => $value) {
 				update_post_meta($post['ID'], $key, $value);
 				if (count($terms) > 0) {

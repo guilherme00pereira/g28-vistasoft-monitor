@@ -39,11 +39,16 @@ class Client
 
     public function listRealStates()
     {
-		Logger::getInstance()->clear();
-	    $items = $this->requestPage(1);
-	    $this->walkThrough( $items );
-	    $manager = new PropertiesManager();
-	    $manager->run( $this->codesQueue );
+        $options    = new OptionManager();
+        $page       = $options->getNextPage();
+	    $items = $this->requestPage($page);
+        if( empty( $items ) ) {
+            Logger::getInstance()->add("Nenhum imóvel retornado");
+        } else {
+            $this->walkThrough( $items );
+            $manager = new PropertiesManager();
+            $manager->run( $this->codesQueue );
+        }
     }
 
 	/**

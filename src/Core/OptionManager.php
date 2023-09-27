@@ -7,23 +7,26 @@ use G28\VistasoftMonitor\VistaSoft\PropertiesManager;
 class OptionManager
 {
     const OPTIONS_NAME      = 'g28-vistasoft-monitor_options';
-	const OPTIONS_PROCESS      = 'g28-vistasoft-monitor-process-next-page';
+	const OPTIONS_PROCESS	= 'g28-vistasoft-monitor-process-next-page';
+	const OPTIONS_SUMMARY   = 'g28-vistasoft-monitor-summary';
 
 	private $options;
 	private $processOptions;
+	private $summary;
 
 	public function __construct()
 	{
 		$this->normalizeOptions();
-		$this->options        = get_option(self::OPTIONS_NAME);
-		$this->processOptions = get_option(self::OPTIONS_PROCESS);
+		$this->options        	= get_option(self::OPTIONS_NAME);
+		$this->processOptions 	= get_option(self::OPTIONS_PROCESS);
+		$this->summary			= get_option(self::OPTIONS_SUMMARY);
 	}
 
 	private function normalizeOptions()
 	{
 		if( is_bool( get_option(self::OPTIONS_NAME) ) ) {
 			update_option( self::OPTIONS_NAME, [
-				'auto'			=> false,
+				'enable'		=> false,
 				'fields'		=> $this->fieldsOptions(),
 				'post_type'		=> PropertiesManager::POSTTYPE,
 				'features'		=> $this->featuresOptions(),
@@ -35,12 +38,15 @@ class OptionManager
 				'total'         => 1
 			]);
 		}
+		if( is_bool( get_option(self::OPTIONS_SUMMARY ) ) ) {
+			update_option(self::OPTIONS_SUMMARY, $this->resumeObject() );
+		}
 	}
 
-	public static function initialize()
+	public function initialize()
 	{
 		update_option( self::OPTIONS_NAME, [
-			'auto'			=> false,
+			'enable'		=> false,
 			'fields'		=> ( new OptionManager )->fieldsOptions(),
 			'post_type'		=> PropertiesManager::POSTTYPE,
 			'features'		=> ( new OptionManager )->featuresOptions(),
@@ -49,6 +55,7 @@ class OptionManager
 			'next'          => 1,
 			'total'         => 1
 		]);
+		update_option(self::OPTIONS_SUMMARY, $this->resumeObject() );
 	}
 
 	public function getFieldsMapping(): array
@@ -61,22 +68,75 @@ class OptionManager
 		return $this->processOptions['next'];
 	}
 
-	public function toggleAuto()
+	public function toggleEnable()
 	{
-		if( isset( $this->options['auto'] )) {
-			$this->options['auto'] = ! $this->options['auto'];
+		if( isset( $this->options['enable'] )) {
+			$this->options['enable'] = ! $this->options['enable'];
 		} else {
-			$this->options['auto'] = false;
+			$this->options['enable'] = false;
+			CronEvent::getInstance()->deactivate();
 		}
 		update_option( self::OPTIONS_NAME, $this->options );
 	}
 
-	public function getAuto(): bool
+	public function getEnable(): bool
 	{
-		if( !isset( $this->options['auto'] ) ) {
-			self::initialize();
+		if( !isset( $this->options['enable'] ) ) {
+			$this->initialize();
+			CronEvent::getInstance()->deactivate();
+			return false;
+		} else {
+			return $this->options['enable'];
 		}
-		return $this->options['auto'];
+	}
+
+	private function resumeObject(): array
+	{
+		return [
+			'excluidos'		=> [ 'valor' => 0, 'codigos' => [] ],
+			'cadastrados' 	=> [ 'valor' => 0, 'codigos' => [] ],
+			'atualizados'	=> [ 'valor' => 0, 'codigos' => [] ],
+		];
+	}
+
+	public function setExcluded( $code )
+	{
+		$this->summary['excluidos']['valor'] = $this->summary['excluidos']['valor'] + 1;
+		$this->summary['excluidos']['codigos'][] = $code;
+		update_option( self::OPTIONS_SUMMARY, $this->summary );
+	}
+
+	public function setAdded( $code )
+	{
+		$this->summary['cadastrados']['valor'] = $this->summary['cadastrados']['valor'] + 1;
+		$this->summary['cadastrados']['codigos'][] = $code;
+		update_option( self::OPTIONS_SUMMARY, $this->options );
+	}
+
+	public function setUpdated( $code )
+	{
+		$this->summary['atualizados']['valor'] = $this->summary['atualizados']['valor'] + 1;
+		$this->summary['atualizados']['codigos'][] = $code;
+		update_option( self::OPTIONS_SUMMARY, $this->summary );
+	}
+
+	public function getSummary(): string
+	{
+		$html = "<div class='summary-container'>";
+		$html .= "<div class='summary-item'>";
+		$html .= "<span class='summary-title'>Imóveis excluídos: </span>";
+		$html .= "<span class='summary-value'>" . $this->summary['excluidos']['valor'] . "</span>";
+		$html .= "</div>";
+		$html .= "<div class='summary-item'>";
+		$html .= "<span class='summary-title'>Imóveis cadastrados: </span>";
+		$html .= "<span class='summary-value'>" . $this->summary['cadastrados']['valor'] . "</span>";
+		$html .= "</div>";
+		$html .= "<div class='summary-item'>";
+		$html .= "<span class='summary-title'>Imóveis atualizados: </span>";
+		$html .= "<span class='summary-value'>" . $this->summary['atualizados']['valor'] . "</span>";
+		$html .= "</div>";
+		$html .= "</div>";
+		return $html;
 	}
 
 	private function fieldsOptions(): array

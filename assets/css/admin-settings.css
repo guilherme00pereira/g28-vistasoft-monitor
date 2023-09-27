@@ -36,6 +36,15 @@
     flex-direction: column;
 }
 
+.summary-content {
+    margin: 0;
+    padding: 2rem;
+    height: 100px;
+    background-color: #EFF9FA;
+    border: 1px solid #a0dee4;
+    overflow-y: auto;
+}
+
 .log-content {
     margin: 0;
     padding: 2rem;

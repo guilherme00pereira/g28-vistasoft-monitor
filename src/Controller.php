@@ -4,7 +4,6 @@ namespace G28\VistasoftMonitor;
 
 use Exception;
 use G28\VistasoftMonitor\Core\CronEvent;
-use G28\VistasoftMonitor\VistaSoft\Client;
 use G28\VistasoftMonitor\Core\Logger;
 use G28\VistasoftMonitor\Core\OptionManager;
 use G28\VistasoftMonitor\Core\Plugin;
@@ -15,9 +14,8 @@ class Controller
 	{
 		add_action('admin_menu', array($this, 'addPage' ));
 		add_action( 'admin_enqueue_scripts', [ $this, 'registerStylesAndScripts'] );
-		add_action( 'wp_ajax_process', [ $this, 'process' ] );
 		add_action( 'wp_ajax_readLog', [ $this, 'readLog' ] );
-		add_action('wp_ajax_toggleAuto', [ $this, 'toggleAuto' ] );
+		add_action('wp_ajax_toggleEnable', [ $this, 'toggleEnable' ] );
 	}
 
 	public function addPage()
@@ -48,24 +46,10 @@ class Controller
 		echo $html;
 	}
 
-	public function process()
-	{
-		try {
-			wp_verify_nonce( 'g28_vistasoft_monitor_nonce' );
-			$client = new Client();
-			$client->listRealStates();
-			$content    = Logger::getInstance()->getLogFileContent();
-			echo json_encode(['success' => true, 'message' => $content]);
-		} catch (Exception $e) {
-			echo json_encode(['error' => false, 'message' => 'Erro ao abrir arquivo de log.']);
-		}
-		wp_die();
-	}
-
 	public function readLog()
 	{
 		try {
-			$content    = Logger::getInstance()->getLogFileContent();
+			$content    = Logger::getInstance()->getLogProcessFileContent();
 			echo json_encode(['success' => true, 'message' => $content]);
 		} catch (Exception $e) {
 			echo json_encode(['error' => false, 'message' => 'Erro ao abrir arquivo de log.']);
@@ -73,13 +57,13 @@ class Controller
 		wp_die();
 	}
 
-	public function toggleAuto()
+	public function toggleEnable()
 	{
 		try {
 			$optionManager = new OptionManager();
-			$optionManager->toggleAuto();
-			$auto = $_POST['auto'];
-			$auto === "1" ? CronEvent::getInstance()->activate() : CronEvent::getInstance()->deactivate();
+			$optionManager->toggleEnable();
+			$enable = $_POST['enable'];
+			$enable === "1" ? CronEvent::getInstance()->activate() : CronEvent::getInstance()->deactivate();
 			echo json_encode(['success' => true, 'message' => '']);
 		} catch (Exception $e) {
 			echo json_encode(['error' => false, 'message' => 'Erro ao abrir arquivo de log.']);
@@ -100,10 +84,9 @@ class Controller
 		wp_localize_script( Plugin::getAssetsPrefix() . 'admin-scripts', 'ajaxobj', [
 			'ajax_url'        	            => admin_url( 'admin-ajax.php' ),
 			'g28_vistasoft_monitor_nonce'	=> wp_create_nonce( 'g28_vistasoft_monitor_nonce' ),
-			'action_Process'                 => 'process',
-			'action_ReadLog'                 => 'readLog',
-			'action_toggleAuto'              => 'toggleAuto',
-			'autoProcess'                          => ( new OptionManager() )->getAuto(),
+			'action_ReadLog'                => 'readLog',
+			'action_toggleEnable'			=> 'toggleEnable',
+			'enabled'						=> ( new OptionManager() )->getEnable(),
 		]);
 	}
 
