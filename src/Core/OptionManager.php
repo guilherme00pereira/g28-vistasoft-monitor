@@ -7,18 +7,19 @@ use G28\VistasoftMonitor\VistaSoft\PropertiesManager;
 class OptionManager
 {
     const OPTIONS_NAME      = 'g28-vistasoft-monitor_options';
-	const OPTIONS_PROCESS	= 'g28-vistasoft-monitor-process-next-page';
 	const OPTIONS_SUMMARY   = 'g28-vistasoft-monitor-summary';
+	const OPTIONS_CRON      = 'g28-vistasoft-monitor-cron-next-page';
 
 	private $options;
-	private $processOptions;
 	private $summary;
+
+	private $cronOptions;
 
 	public function __construct()
 	{
 		$this->normalizeOptions();
 		$this->options        	= get_option(self::OPTIONS_NAME);
-		$this->processOptions 	= get_option(self::OPTIONS_PROCESS);
+		$this->cronOptions      = get_option(self::OPTIONS_CRON);
 		$this->summary			= get_option(self::OPTIONS_SUMMARY);
 	}
 
@@ -32,8 +33,8 @@ class OptionManager
 				'features'		=> $this->featuresOptions(),
 			 ] );
 		}
-		if( is_bool( get_option( self::OPTIONS_PROCESS ) ) ) {
-			update_option(self::OPTIONS_PROCESS, [
+		if( is_bool( get_option( self::OPTIONS_CRON ) ) ) {
+			update_option(self::OPTIONS_CRON, [
 				'next'          => 1,
 				'total'         => 1
 			]);
@@ -51,7 +52,7 @@ class OptionManager
 			'post_type'		=> PropertiesManager::POSTTYPE,
 			'features'		=> ( new OptionManager )->featuresOptions(),
 		]);
-		update_option(self::OPTIONS_PROCESS, [
+		update_option(self::OPTIONS_CRON, [
 			'next'          => 1,
 			'total'         => 1
 		]);
@@ -65,13 +66,26 @@ class OptionManager
 
 	public function getNextPage()
 	{
-		return $this->processOptions['next'];
+		return $this->cronOptions['next'];
+	}
+
+	public function updateCronOptions( $total )
+	{
+		if( $this->cronOptions['next'] >= $total ) {
+			$this->cronOptions['next'] = 1;
+			update_option(self::OPTIONS_SUMMARY, $this->resumeObject() );
+
+		} else {
+			$this->cronOptions['next'] = $this->cronOptions['next'] + 1;
+		}
+		$this->cronOptions['total'] = $total;
+		update_option(self::OPTIONS_CRON, $this->cronOptions);
 	}
 
 	public function toggleEnable()
 	{
 		if( isset( $this->options['enable'] )) {
-			$this->options['enable'] = ! $this->options['enable'];
+			$this->options['enable'] = !$this->options['enable'];
 		} else {
 			$this->options['enable'] = false;
 			CronEvent::getInstance()->deactivate();

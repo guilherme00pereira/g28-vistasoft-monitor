@@ -23,10 +23,10 @@ class Client
         $this->codesQueue       = [];
     }
 
-    private function makeRequest( $endpoint, $showtotal = false, $page = 1)
+    private function listRequest( $showtotal = false, $page = 1)
     {
         $queryArgs  = CRMFields::getQueryArgs( $page );
-	    $url        = self::CRM_URL . $endpoint . "?key=" . self::CRM_KEY . "&pesquisa=" . $queryArgs;
+	    $url        = self::CRM_URL . self::CRM_LIST_ENDPOINT . "?key=" . self::CRM_KEY . "&pesquisa=" . $queryArgs;
         if( $showtotal ) {
             $url   .= "&showtotal=1";
         }
@@ -37,27 +37,50 @@ class Client
         return json_decode( wp_remote_retrieve_body( $response ) );
     }
 
+    private function singleRequest( $code )
+    {
+        $url        = self::CRM_URL . self::CRM_DETAILS_ENDPOINT . "?key=" . self::CRM_KEY . "&imovel=" . $code . "&pesquisa=" . CRMFields::getSearchArgs();
+        $response   = wp_remote_get( $url, $this->requestArgs );
+        if( is_wp_error( $response ) ) {
+            Logger::getInstance()->add("Erro ao importar dados do imóvel: " . $code . " - " . $response->get_error_message());
+            return "";
+        }
+        return json_decode( wp_remote_retrieve_body( $response ) );
+    }
+
     public function listRealStates()
     {
         $options    = new OptionManager();
         $page       = $options->getNextPage();
-	    $items = $this->requestPage($page);
+        Logger::getInstance()->add( "Listando imóveis do CRM - página: " . $page );
+	    $items = $this->listRequest( true, $page );
         if( empty( $items ) ) {
             Logger::getInstance()->add("Nenhum imóvel retornado");
         } else {
+	        $options->updateCronOptions( $items->paginas );
             $this->walkThrough( $items );
             $manager = new PropertiesManager();
             $manager->run( $this->codesQueue );
         }
     }
 
-	/**
-	 * @return mixed
-	 */
-	public function requestPage($page) {
-		Logger::getInstance()->add( "Listando imóveis do CRM - página: " . $page );
-		return $this->makeRequest( self::CRM_LIST_ENDPOINT, true, $page );
-	}
+    public function getSingleRealState( $code )
+    {
+        Logger::getInstance()->add( "Buscando dados do imóvel: " . $code );
+	    $item = $this->singleRequest( $code );
+        if( empty( $item ) ) {
+            Logger::getInstance()->add("Nenhum imóvel retornado");
+        } else {
+            if ( is_object( $item ) ) {
+                $this->codesQueue[] = [
+                    "codigo" => $item->Codigo,
+                    "exibir" => $item->ExibirNoSite
+                ];
+            }
+            $manager = new PropertiesManager();
+            $manager->run( $this->codesQueue );
+        }
+    }
 
     private function walkThrough( $items )
     {

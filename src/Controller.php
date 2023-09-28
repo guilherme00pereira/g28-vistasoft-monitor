@@ -7,6 +7,8 @@ use G28\VistasoftMonitor\Core\CronEvent;
 use G28\VistasoftMonitor\Core\Logger;
 use G28\VistasoftMonitor\Core\OptionManager;
 use G28\VistasoftMonitor\Core\Plugin;
+use G28\VistasoftMonitor\VistaSoft\Client;
+use G28\VistasoftMonitor\VistaSoft\PropertiesManager;
 
 class Controller
 {
@@ -15,6 +17,7 @@ class Controller
 		add_action('admin_menu', array($this, 'addPage' ));
 		add_action( 'admin_enqueue_scripts', [ $this, 'registerStylesAndScripts'] );
 		add_action( 'wp_ajax_readLog', [ $this, 'readLog' ] );
+		add_action( 'wp_ajax_readSummary', [ $this, 'readSummary' ] );
 		add_action('wp_ajax_toggleEnable', [ $this, 'toggleEnable' ] );
 	}
 
@@ -57,6 +60,18 @@ class Controller
 		wp_die();
 	}
 
+	public function readSummary()
+	{
+		try {
+			$options    = new OptionManager();
+			$content    = $options->getSummary();
+			echo json_encode(['success' => true, 'message' => $content]);
+		} catch (Exception $e) {
+			echo json_encode(['error' => false, 'message' => 'Erro ao retornar dados de resumo do processamento.']);
+		}
+		wp_die();
+	}
+
 	public function toggleEnable()
 	{
 		try {
@@ -65,6 +80,18 @@ class Controller
 			$enable = $_POST['enable'];
 			$enable === "1" ? CronEvent::getInstance()->activate() : CronEvent::getInstance()->deactivate();
 			echo json_encode(['success' => true, 'message' => '']);
+		} catch (Exception $e) {
+			echo json_encode(['error' => false, 'message' => 'Erro ao abrir arquivo de log.']);
+		}
+		wp_die();
+	}
+
+	public function addRealState()
+	{
+		try {
+			$code = $_POST['code'];
+			$client = new Client();
+			$client->getSingleRealState($code);			
 		} catch (Exception $e) {
 			echo json_encode(['error' => false, 'message' => 'Erro ao abrir arquivo de log.']);
 		}
@@ -85,6 +112,7 @@ class Controller
 			'ajax_url'        	            => admin_url( 'admin-ajax.php' ),
 			'g28_vistasoft_monitor_nonce'	=> wp_create_nonce( 'g28_vistasoft_monitor_nonce' ),
 			'action_ReadLog'                => 'readLog',
+			'action_ReadSummary'            => 'readSummary',
 			'action_toggleEnable'			=> 'toggleEnable',
 			'enabled'						=> ( new OptionManager() )->getEnable(),
 		]);

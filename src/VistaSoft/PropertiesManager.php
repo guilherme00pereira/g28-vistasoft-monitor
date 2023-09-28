@@ -10,10 +10,6 @@ use G28\VistasoftMonitor\Core\TermTaxonomies;
 class PropertiesManager
 {
 
-	const ADD = 'add';
-	const UPDATE = 'update';
-	const REMOVE = 'remove';
-
 	const POSTTYPE = 'imovel';
 	const BOATTYPE = 'embarcacao';
 	private array $dbKeys;
@@ -79,17 +75,12 @@ class PropertiesManager
 				Logger::getInstance()->add("Erro ao processar o imóvel de código " . $codigo . ": " . $e->getMessage());
 			}
 		}
-		Logger::getInstance()->add("Removendo imóveis presentes no banco, mas não retornados pelo CRM");
-		foreach ($this->dbKeys as $key) {
-			Logger::getInstance()->add("Removendo o imóvel: " . $key);
-			$this->cleanDatabaseAndMediaContent($key);
-		}
+		
 		Logger::getInstance()->add("Importação dos imóveis finalizada!");
 	}
 
 	public function remove($code)
 	{
-		$this->doImports();
 		try {
 			Logger::getInstance()->add("Removendo o imóvel: " . $code);
 			$this->cleanDatabaseAndMediaContent($code);
@@ -133,11 +124,6 @@ class PropertiesManager
 					wp_delete_object_term_relationships($post, TermTaxonomies::TAXONOMY_STATE_CITY);
 					wp_set_object_terms($post['ID'], $terms, TermTaxonomies::TAXONOMY_STATE_CITY);
 				}
-				// if ($isEnterprise) {
-				// 	wp_set_object_terms($post['ID'], TermTaxonomies::ENTERPRISE_TERM_ID, TermTaxonomies::TAXONOMY_ENTERPRISE);
-				// } else {
-				// 	wp_delete_object_term_relationships($post, TermTaxonomies::TAXONOMY_ENTERPRISE);
-				// }
 			}
 		}
 		Logger::getInstance()->add("Imóvel " . $code . " " . $action . " com sucesso!");
@@ -172,7 +158,6 @@ class PropertiesManager
 					if ($key === "Lancamento") {
 						Logger::getInstance()->add("Lançamento: " . $value);
 						$isEnterprise = $value === "Sim";
-						//Logger::getInstance()->add("Empreendimento: " . $isEnterprise);
 					}
 
 					$fields[$idx] = $value === "Sim" ? "true" : "false";
