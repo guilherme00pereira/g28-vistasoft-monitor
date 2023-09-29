@@ -14,11 +14,15 @@ class PropertiesManager
 	const BOATTYPE = 'embarcacao';
 	private array $dbKeys;
 	private OptionManager $options;
+	private Client $vistasoft;
+	private Logger $logger;
 
-	public function __construct()
+	public function __construct(Client $client)
 	{
 		$this->dbKeys = $this->getIdsFromDB();
 		$this->options = new OptionManager();
+		$this->vistasoft = $client;
+		$this->logger = $client->getLogger();
 	}
 
 	private function doImports()
@@ -42,50 +46,48 @@ class PropertiesManager
 		return $codes;
 	}
 
-	public function run($codes)
+	public function run()
 	{
 		$this->doImports();
-		foreach ($codes as $code) {
+		foreach ($this->vistasoft->getCodesQueue() as $code) {
 			sleep(2);
 			$exibir 	= $code['exibir'];
 			$codigo 	= $code['codigo'];
 			try {
-				if ( $exibir !== "Sim") {
-					Logger::getInstance()->add("Imóvel: " . $codigo . " não deve ser exibido no site");
-					$this->remove($codigo);
-					$this->options->setExcluded($codigo);
-				} else {
-					$client = new Client();
-					$data = $client->getRealStateData($codigo);
+				if ( $exibir === "Sim") {
+					$data = $this->vistasoft->getRealStateData($codigo);
 					[$meta_values, $terms] = $this->mapColumns($data);
 					if (in_array($codigo, $this->dbKeys)) {
-						Logger::getInstance()->add("Atualizando dados do imóvel: " . $codigo);
+						$this->logger->add( "Atualizando dados do imóvel: " . $codigo);
 
 					} else {
-						Logger::getInstance()->add("Cadastrando o imóvel: " . $codigo);
+						$this->logger->add( "Cadastrando o imóvel: " . $codigo);
 					}
 					$this->updateDatabaseContent($meta_values, $codigo, $terms);
 					$key = array_search($codigo, $this->dbKeys);
 					if ($key !== false) {
 						unset($this->dbKeys[$key]);
 					}
-
+				} else {
+					$this->logger->add( "Imóvel: " . $codigo . " não deve ser exibido no site");
+					$this->remove($codigo);
+					$this->options->setExcluded($codigo);
 				}
 			} catch (Exception $e) {
-				Logger::getInstance()->add("Erro ao processar o imóvel de código " . $codigo . ": " . $e->getMessage());
+				$this->logger->add( "Erro ao processar o imóvel de código " . $codigo . ": " . $e->getMessage());
 			}
 		}
 		
-		Logger::getInstance()->add("Importação dos imóveis finalizada!");
+		$this->logger->add("Importação dos imóveis finalizada!");
 	}
 
 	public function remove($code)
 	{
 		try {
-			Logger::getInstance()->add("Removendo o imóvel: " . $code);
+			$this->logger->add( "Removendo o imóvel: " . $code);
 			$this->cleanDatabaseAndMediaContent($code);
 		} catch (Exception $e) {
-			Logger::getInstance()->add("Erro ao remover o imóvel no BD: " . $e->getMessage());
+			$this->logger->add( "Erro ao remover o imóvel no BD: " . $e->getMessage());
 		}
 	}
 
@@ -95,6 +97,7 @@ class PropertiesManager
 		list($title, $type) = $this->checkIfEmbarcacao($values);
 		$action = is_null($post) ? "cadastrado" : "atualizado";
 		if (is_null($post)) {
+			$this->logger->add( "Cadastrando post " . $post['ID'] . " - " . $post['title'] . " metadata.");
 			$post = wp_insert_post([
 				'post_title' => $title,
 				'post_content' => empty($values['descricao-do-imovel']) ? "" : $values['descricao-do-imovel'],
@@ -109,7 +112,7 @@ class PropertiesManager
 				}
 			}
 		} else {
-			Logger::getInstance()->add("Atualizando post " . $post['ID'] . " metadata.");
+			$this->logger->add( "Atualizando post " . $post['ID'] . " - " . $post['title'] . " metadata.");
 			wp_update_post([
 				'ID' => $post['ID'],
 				'post_title' => $title,
@@ -126,22 +129,22 @@ class PropertiesManager
 				}
 			}
 		}
-		Logger::getInstance()->add("Imóvel " . $code . " " . $action . " com sucesso!");
+		$this->logger->add( "Imóvel " . $code . " - " . $post['title'] . " " . $action . " com sucesso!");
 	}
 
 	private function cleanDatabaseAndMediaContent($code)
 	{
 		$post = $this->getPostByMetaCode($code);
-		Logger::getInstance()->add("pegou post: " . $post['ID']);
+		$this->logger->add( "pegou post: " . $post['ID']);
 		//remove post media
 		$medias = explode(",", get_post_meta($post['ID'], 'galeria-de-imagens', true)); //get_attached_media( '', $post->ID );
 		foreach ($medias as $media) {
-			Logger::getInstance()->add("removendo image ID: " . $media);
+			$this->logger->add( "removendo image ID: " . $media);
 			wp_delete_attachment($media, true);
 		}
 		//remove post
 		wp_delete_post($post['ID']);
-		Logger::getInstance()->add("Imóvel " . $code . " removido com sucesso!");
+		$this->logger->add( "Imóvel " . $code . " removido com sucesso!");
 	}
 
 	private function mapColumns($data): array
@@ -156,7 +159,7 @@ class PropertiesManager
 					$fields[$idx] = $this->getImageId($value);
 				} else if (in_array($key, CRMFields::BOOLEAND_FIELDS)) {
 					if ($key === "Lancamento") {
-						Logger::getInstance()->add("Lançamento: " . $value);
+						$this->logger->add( "Lançamento: " . $value);
 						$isEnterprise = $value === "Sim";
 					}
 
@@ -266,7 +269,8 @@ class PropertiesManager
 	private function getPostByMetaCode($code)
 	{
 		global $wpdb;
-		$sql = "select post_id as ID from " . $wpdb->prefix . "postmeta where meta_value = '" . $code . "'";
+		$sql = "select ID, post_title as title from " . $wpdb->prefix . "posts 
+				where ID = (select post_id from " . $wpdb->prefix . "postmeta where meta_value = '" . $code . "')";
 		$result = $wpdb->get_results($sql, ARRAY_A);
 		if (is_null($result)) {
 			return null;

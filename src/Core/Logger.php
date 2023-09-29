@@ -4,43 +4,47 @@ namespace G28\VistasoftMonitor\Core;
 
 class Logger
 {
-    protected static ?Logger $_instance = null;
-	private string $logProcessFile;
+	const LOGCRON = "cron";
+	const LOGADD = "add";
+	private string $logCronFile;
+	private string $logAddFile;
 
-	public function __construct()
+	private string $logType;
+
+	public function __construct($logType)
     {
-	    $this->logProcessFile = "log_" . date("Ymd") . ".txt";
-        $this->logResumeFile  = "log_resume_" . date("Ymd") . ".txt";
+		$this->logType = $logType;
+	    $this->logCronFile = "cron_" . date("Ymd") . ".txt";
+        $this->logAddFile  = "add_" . date("Ymd") . ".txt";
 		if(!file_exists(Plugin::getLogDir())) {
 			mkdir(Plugin::getLogDir());
 		}
-		if(!file_exists(Plugin::getLogDir() . $this->logProcessFile)) {
-			file_put_contents(Plugin::getLogDir() . $this->logProcessFile, "");
+		if(!file_exists(Plugin::getLogDir() . $this->logCronFile)) {
+			file_put_contents(Plugin::getLogDir() . $this->logCronFile, "");
 		}
-    }
-
-    public static function getInstance(): ?Logger {
-        if ( is_null( self::$_instance ) ) {
-            self::$_instance = new self();
-        }
-        return self::$_instance;
-    }
+		if(!file_exists(Plugin::getLogDir() . $this->logAddFile)) {
+			file_put_contents(Plugin::getLogDir() . $this->logAddFile, "");
+		}
+	}
 
     public function add( string $message ) {
+		$file = $this->logType === self::LOGCRON ? $this->logCronFile : $this->logAddFile;
         date_default_timezone_set('America/Sao_Paulo');
         $timestamp    = date('d/m/Y h:i:s A');
-		$actualOutput = file_get_contents( Plugin::getLogDir() . $this->logProcessFile );
+		$actualOutput = file_get_contents( Plugin::getLogDir() . $file );
         $output = "[ $timestamp ] $message" . PHP_EOL . $actualOutput;
-        file_put_contents( Plugin::getLogDir() . $this->logProcessFile, $output);
+        file_put_contents( Plugin::getLogDir() . $file, $output);
     }
 
 	public function clear(  ) {
-		file_put_contents( Plugin::getLogDir() . $this->logProcessFile, "");
+		file_put_contents( Plugin::getLogDir() . $this->logCronFile, "");
+		file_put_contents( Plugin::getLogDir() . $this->logAddFile, "");
 	}
 
-    public function getLogProcessFileContent(): string
+    public function getLogContent(): string
     {
-        $filepath = Plugin::getLogDir() . $this->logProcessFile;
+		$file = $this->logType === self::LOGCRON ? $this->logCronFile : $this->logAddFile;
+        $filepath = Plugin::getLogDir() . $file;
         return nl2br(file_get_contents( $filepath ));
     }
 }

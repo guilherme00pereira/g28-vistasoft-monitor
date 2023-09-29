@@ -15,12 +15,14 @@ class Client
     private array $requestArgs;
     private array $codesQueue;
 
-	private array $codesFromDb;
+	private Logger $logger;
 
-    public function __construct()
+
+    public function __construct($logType)
     {
         $this->requestArgs      = [ 'headers' => ['Accept' => 'application/json'] ];
         $this->codesQueue       = [];
+	    $this->logger           = new Logger( $logType );
     }
 
     private function listRequest( $showtotal = false, $page = 1)
@@ -32,7 +34,7 @@ class Client
         }
         $response   = wp_remote_get( $url, $this->requestArgs );
         if( is_wp_error( $response ) ) {
-	        Logger::getInstance()->add("Erro ao importar imóveis da api" . $response->get_error_message());
+	        $this->logger->add( "Erro ao importar imóveis da api" . $response->get_error_message());
         }
         return json_decode( wp_remote_retrieve_body( $response ) );
     }
@@ -42,7 +44,7 @@ class Client
         $url        = self::CRM_URL . self::CRM_DETAILS_ENDPOINT . "?key=" . self::CRM_KEY . "&imovel=" . $code . "&pesquisa=" . CRMFields::getSearchArgs();
         $response   = wp_remote_get( $url, $this->requestArgs );
         if( is_wp_error( $response ) ) {
-            Logger::getInstance()->add("Erro ao importar dados do imóvel: " . $code . " - " . $response->get_error_message());
+            $this->logger->add( "Erro ao importar dados do imóvel: " . $code . " - " . $response->get_error_message());
             return "";
         }
         return json_decode( wp_remote_retrieve_body( $response ) );
@@ -52,24 +54,24 @@ class Client
     {
         $options    = new OptionManager();
         $page       = $options->getNextPage();
-        Logger::getInstance()->add( "Listando imóveis do CRM - página: " . $page );
+        $this->logger->add( "Listando imóveis do CRM - página: " . $page );
 	    $items = $this->listRequest( true, $page );
         if( empty( $items ) ) {
-            Logger::getInstance()->add("Nenhum imóvel retornado");
+            $this->logger->add("Nenhum imóvel retornado");
         } else {
 	        $options->updateCronOptions( $items->paginas );
             $this->walkThrough( $items );
-            $manager = new PropertiesManager();
-            $manager->run( $this->codesQueue );
+            $manager = new PropertiesManager( $this );
+            $manager->run();
         }
     }
 
     public function getSingleRealState( $code )
     {
-        Logger::getInstance()->add( "Buscando dados do imóvel: " . $code );
+        $this->logger->add( "Buscando dados do imóvel: " . $code );
 	    $item = $this->singleRequest( $code );
         if( empty( $item ) ) {
-            Logger::getInstance()->add("Nenhum imóvel retornado");
+            $this->logger->add("Nenhum imóvel retornado");
         } else {
             if ( is_object( $item ) ) {
                 $this->codesQueue[] = [
@@ -77,15 +79,15 @@ class Client
                     "exibir" => $item->ExibirNoSite
                 ];
             }
-            $manager = new PropertiesManager();
-            $manager->run( $this->codesQueue );
+            $manager = new PropertiesManager($this);
+            $manager->run();
         }
     }
 
     private function walkThrough( $items )
     {
 	    if ( empty( $items ) ) {
-		    Logger::getInstance()->add( "Nenhum imóvel retornado" );
+		    $this->logger->add( "Nenhum imóvel retornado" );
 	    } else {
 		    foreach ( $items as $item ) {
 			    if ( is_object( $item ) ) {
@@ -100,20 +102,26 @@ class Client
 
     public function getRealStateData( $id )
     {
-        Logger::getInstance()->add("Importando dados do imóvel código: " . $id);
+        $this->logger->add( "Importando dados do imóvel código: " . $id);
         $url        = self::CRM_URL . self::CRM_DETAILS_ENDPOINT . "?key=" . self::CRM_KEY . "&imovel=" . $id . "&pesquisa=" . CRMFields::getSearchArgs();
         $response   = wp_remote_get( $url, $this->requestArgs );
         if( is_wp_error( $response ) ) {
-            Logger::getInstance()->add("Erro ao importar dados do imóvel: " . $id . " - " . $response->get_error_message());
+            $this->logger->add( "Erro ao importar dados do imóvel: " . $id . " - " . $response->get_error_message());
             return "";
         }
 		$content = json_decode( wp_remote_retrieve_body( $response ) );
 		if($content->status === 400) {
-			Logger::getInstance()->add("Erro ao importar dados do imóvel: " . $id . " - " . $content->message );
+			$this->logger->add( "Erro ao importar dados do imóvel: " . $id . " - " . $content->message );
 			return "";
 		}
         return $content;
     }
 
+	public function getCodesQueue(): array {
+		return $this->codesQueue;
+	}
 
+	public function getLogger(): Logger {
+		return $this->logger;
+	}
 }

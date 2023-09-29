@@ -18,6 +18,7 @@ class Controller
 		add_action( 'admin_enqueue_scripts', [ $this, 'registerStylesAndScripts'] );
 		add_action( 'wp_ajax_readLog', [ $this, 'readLog' ] );
 		add_action( 'wp_ajax_readSummary', [ $this, 'readSummary' ] );
+		add_action( 'wp_ajax_addRealState', [ $this, 'addRealState' ]);
 		add_action('wp_ajax_toggleEnable', [ $this, 'toggleEnable' ] );
 	}
 
@@ -52,7 +53,8 @@ class Controller
 	public function readLog()
 	{
 		try {
-			$content    = Logger::getInstance()->getLogProcessFileContent();
+			$logger     = new Logger(Logger::LOGCRON);
+			$content    = $logger->getLogContent();
 			echo json_encode(['success' => true, 'message' => $content]);
 		} catch (Exception $e) {
 			echo json_encode(['error' => false, 'message' => 'Erro ao abrir arquivo de log.']);
@@ -90,8 +92,11 @@ class Controller
 	{
 		try {
 			$code = $_POST['code'];
-			$client = new Client();
-			$client->getSingleRealState($code);			
+			$client = new Client(Logger::LOGADD);
+			$client->getSingleRealState($code);
+			$logger     = new Logger(Logger::LOGADD);
+			$content    = $logger->getLogContent();
+			echo json_encode(['success' => true, 'message' => $content]);
 		} catch (Exception $e) {
 			echo json_encode(['error' => false, 'message' => 'Erro ao abrir arquivo de log.']);
 		}
@@ -113,6 +118,7 @@ class Controller
 			'g28_vistasoft_monitor_nonce'	=> wp_create_nonce( 'g28_vistasoft_monitor_nonce' ),
 			'action_ReadLog'                => 'readLog',
 			'action_ReadSummary'            => 'readSummary',
+			'action_AddRealState'           => 'addRealState',
 			'action_toggleEnable'			=> 'toggleEnable',
 			'enabled'						=> ( new OptionManager() )->getEnable(),
 		]);

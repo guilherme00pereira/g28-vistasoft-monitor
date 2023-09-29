@@ -3,7 +3,7 @@
 use G28\VistasoftMonitor\Core\Plugin;
 
 $default_tab = null;
-$tab         = isset($_GET['tab']) ? $_GET['tab'] : $default_tab;
+$tab         = $_GET['tab'] ?? $default_tab;
 ?>
 
 <div class="wrap">

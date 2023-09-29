@@ -1,5 +1,10 @@
 <?php
 
+use G28\VistasoftMonitor\Core\Logger;
+
+$logger = new Logger(Logger::LOGCRON);
+$log = $logger->getLogContent();
+
 ?>
 
 <div class="wrap">
@@ -17,4 +22,8 @@
             </tr>
         </tbody>
     </table>
+    <h3>Log de execução</h3>
+    <div id="addFileContent" class="log-content">
+		<?php echo $log ?>
+    </div>
 </div>

@@ -3,7 +3,8 @@
 use G28\VistasoftMonitor\Core\Logger;
 use G28\VistasoftMonitor\Core\OptionManager;
 
-$log = Logger::getInstance()->getLogProcessFileContent();
+$logger = new Logger(Logger::LOGCRON);
+$log = $logger->getLogContent();
 $manager = new OptionManager();
 $resumo = $manager->getSummary();
 

@@ -16,21 +16,22 @@
   });
 
   $('#btnAdd').click(function (e) {
-	$('#spinAdd').show();
-	let params = {
-		action: ajaxobj.action_Add,
-		nonce: ajaxobj.g28_vistasoft_monitor_nonce,
-		code: $('#codigo').val(),
-	};
-	$.post(
-		ajaxobj.ajax_url,
-		params,
-		function (res) {
-			console.log(res);
-			$('#spinAdd').hide();
-		},
-		"json"
-	);
+      $('#spinAdd').show();
+      let params = {
+          action: ajaxobj.action_AddRealState,
+          nonce: ajaxobj.g28_vistasoft_monitor_nonce,
+          code: $('#codigo').val(),
+      };
+      $.post(
+          ajaxobj.ajax_url,
+          params,
+          function (res) {
+              $('#addFileContent').html(res.message)
+              $('#spinAdd').hide();
+          },
+          "json"
+      );
+  });
 
   $(document).ready(function () {
     if (ajaxobj.enabled === "1") {
@@ -47,7 +48,6 @@
   });
 
   function getLogContent() {
-    const div = $("#logFileContent");
     let params = {
       action: ajaxobj.action_ReadLog,
       nonce: ajaxobj.g28_vistasoft_monitor_nonce,
@@ -56,7 +56,7 @@
       ajaxobj.ajax_url,
       params,
       function (res) {
-        div.html(res.message);
+          $("#logFileContent").html(res.message);
       },
       "json"
     );

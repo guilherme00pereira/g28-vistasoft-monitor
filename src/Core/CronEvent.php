@@ -27,7 +27,7 @@ class CronEvent
 
 	public function execute()
 	{
-		$api = new Client();
+		$api = new Client(Logger::LOGCRON);
 		$api->listRealStates();
 	}
 
