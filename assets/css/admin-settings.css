@@ -54,8 +54,12 @@
     overflow-y: auto;
 }
 
-.toggle-section {
-    padding: 10px 0 30px;
+.log-select-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 20px 0 30px;
 }
 
 .toggle-button{

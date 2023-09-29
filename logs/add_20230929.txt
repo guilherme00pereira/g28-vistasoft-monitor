@@ -1,0 +1,37 @@
+[ 29/09/2023 12:19:15 PM ] Importação dos imóveis finalizada!
+[ 29/09/2023 12:19:15 PM ] Imóvel CV0826 - Casa pé na areia à venda - Cond. Costa Verde Tabatinga atualizado com sucesso!
+[ 29/09/2023 12:19:15 PM ] Atualizando post 4880 - Casa pé na areia à venda - Cond. Costa Verde Tabatinga metadata.
+[ 29/09/2023 12:19:15 PM ] Atualizando dados do imóvel: CV0826
+[ 29/09/2023 12:19:15 PM ] Lançamento: Nao
+[ 29/09/2023 12:19:14 PM ] Importando dados do imóvel código: CV0826
+[ 29/09/2023 12:19:12 PM ] Buscando dados do imóvel: CV0826
+[ 29/09/2023 12:17:01 PM ] Importação dos imóveis finalizada!
+[ 29/09/2023 12:17:01 PM ] Imóvel CV0826 - Casa pé na areia à venda - Cond. Costa Verde Tabatinga atualizado com sucesso!
+[ 29/09/2023 12:17:00 PM ] Atualizando post 4880 - Casa pé na areia à venda - Cond. Costa Verde Tabatinga metadata.
+[ 29/09/2023 12:17:00 PM ] Atualizando dados do imóvel: CV0826
+[ 29/09/2023 12:17:00 PM ] Lançamento: Nao
+[ 29/09/2023 12:17:00 PM ] Importando dados do imóvel código: CV0826
+[ 29/09/2023 12:16:58 PM ] Buscando dados do imóvel: CV0826
+[ 29/09/2023 12:15:48 PM ] Importação dos imóveis finalizada!
+[ 29/09/2023 12:15:48 PM ] Imóvel CV0826 - Casa pé na areia à venda - Cond. Costa Verde Tabatinga atualizado com sucesso!
+[ 29/09/2023 12:15:47 PM ] Atualizando post 4880 - Casa pé na areia à venda - Cond. Costa Verde Tabatinga metadata.
+[ 29/09/2023 12:15:47 PM ] Atualizando dados do imóvel: CV0826
+[ 29/09/2023 12:15:47 PM ] Lançamento: Nao
+[ 29/09/2023 12:15:47 PM ] Importando dados do imóvel código: CV0826
+[ 29/09/2023 12:15:45 PM ] Buscando dados do imóvel: CV0826
+[ 29/09/2023 12:15:04 PM ] Nenhum imóvel retornado
+[ 29/09/2023 12:15:04 PM ] Erro ao importar dados do imóvel: CV0826 - cURL error 28: Operation timed out after 5010 milliseconds with 0 bytes received
+[ 29/09/2023 12:14:59 PM ] Buscando dados do imóvel: CV0826
+[ 29/09/2023 12:12:42 PM ] Importação dos imóveis finalizada!
+[ 29/09/2023 12:12:42 PM ] Imóvel CV0826 - Casa pé na areia à venda - Cond. Costa Verde Tabatinga atualizado com sucesso!
+[ 29/09/2023 12:12:42 PM ] Atualizando post 4880 - Casa pé na areia à venda - Cond. Costa Verde Tabatinga metadata.
+[ 29/09/2023 12:12:42 PM ] Atualizando dados do imóvel: CV0826
+[ 29/09/2023 12:12:42 PM ] Lançamento: Nao
+[ 29/09/2023 12:12:42 PM ] Importando dados do imóvel código: CV0826
+[ 29/09/2023 12:12:40 PM ] Buscando dados do imóvel: CV0826
+[ 29/09/2023 12:12:06 PM ] Importando dados do imóvel código: CV0826
+[ 29/09/2023 12:12:04 PM ] Buscando dados do imóvel: CV0826
+[ 29/09/2023 12:11:22 PM ] Importando dados do imóvel código: CV0826
+[ 29/09/2023 12:11:20 PM ] Buscando dados do imóvel: CV0826
+[ 29/09/2023 12:10:28 PM ] Importando dados do imóvel código: CV0826
+[ 29/09/2023 12:10:25 PM ] Buscando dados do imóvel: CV0826

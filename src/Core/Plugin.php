@@ -51,7 +51,7 @@ class Plugin {
 	 */
 	private static string $log_dir;
 
-	public function __construct( $root ) {
+	private function __construct( $root ) {
 		self::$url              = plugin_dir_url( $root );
 		self::$dir              = plugin_dir_path( $root );
 		self::$plugin_base      = plugin_basename( $root );

@@ -8,7 +8,6 @@ use G28\VistasoftMonitor\Core\Logger;
 use G28\VistasoftMonitor\Core\OptionManager;
 use G28\VistasoftMonitor\Core\Plugin;
 use G28\VistasoftMonitor\VistaSoft\Client;
-use G28\VistasoftMonitor\VistaSoft\PropertiesManager;
 
 class Controller
 {
@@ -65,8 +64,7 @@ class Controller
 	public function readSummary()
 	{
 		try {
-			$options    = new OptionManager();
-			$content    = $options->getSummary();
+			$content    = OptionManager::getInstance()->getSummary();
 			echo json_encode(['success' => true, 'message' => $content]);
 		} catch (Exception $e) {
 			echo json_encode(['error' => false, 'message' => 'Erro ao retornar dados de resumo do processamento.']);
@@ -77,8 +75,7 @@ class Controller
 	public function toggleEnable()
 	{
 		try {
-			$optionManager = new OptionManager();
-			$optionManager->toggleEnable();
+			OptionManager::getInstance()->toggleEnable();
 			$enable = $_POST['enable'];
 			$enable === "1" ? CronEvent::getInstance()->activate() : CronEvent::getInstance()->deactivate();
 			echo json_encode(['success' => true, 'message' => '']);
@@ -94,8 +91,7 @@ class Controller
 			$code = $_POST['code'];
 			$client = new Client(Logger::LOGADD);
 			$client->getSingleRealState($code);
-			$logger     = new Logger(Logger::LOGADD);
-			$content    = $logger->getLogContent();
+			$content    = $client->getLogger()->getLogContent();
 			echo json_encode(['success' => true, 'message' => $content]);
 		} catch (Exception $e) {
 			echo json_encode(['error' => false, 'message' => 'Erro ao abrir arquivo de log.']);
@@ -120,7 +116,7 @@ class Controller
 			'action_ReadSummary'            => 'readSummary',
 			'action_AddRealState'           => 'addRealState',
 			'action_toggleEnable'			=> 'toggleEnable',
-			'enabled'						=> ( new OptionManager() )->getEnable(),
+			'enabled'						=> OptionManager::getInstance()->getEnable(),
 		]);
 	}
 

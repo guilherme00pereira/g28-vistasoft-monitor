@@ -2,7 +2,7 @@
 
 use G28\VistasoftMonitor\Core\Logger;
 
-$logger = new Logger(Logger::LOGCRON);
+$logger = new Logger(Logger::LOGADD);
 $log = $logger->getLogContent();
 
 ?>

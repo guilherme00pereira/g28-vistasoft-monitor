@@ -5,8 +5,6 @@ use G28\VistasoftMonitor\Core\OptionManager;
 
 $logger = new Logger(Logger::LOGCRON);
 $log = $logger->getLogContent();
-$manager = new OptionManager();
-$resumo = $manager->getSummary();
 
 ?>
 
@@ -26,7 +24,7 @@ $resumo = $manager->getSummary();
         </div>
         <h3>Resumo</h3>
         <div id="logSummary" class="summary-content">
-			<?php echo $resumo ?>
+			<?php echo OptionManager::getInstance()->getSummary() ?>
         </div>
         <h3>Log de execução</h3>
         <div id="logFileContent" class="log-content">

@@ -10,27 +10,37 @@ class OptionManager
 	const OPTIONS_SUMMARY   = 'g28-vistasoft-monitor-summary';
 	const OPTIONS_CRON      = 'g28-vistasoft-monitor-cron-next-page';
 
-	private $options;
-	private $summary;
+	protected static ?OptionManager $_instance = null;
 
-	private $cronOptions;
+	private static $options;
+	private static $summary;
 
-	public function __construct()
+	private static $cronOptions;
+
+	private function __construct()
 	{
-		$this->normalizeOptions();
-		$this->options        	= get_option(self::OPTIONS_NAME);
-		$this->cronOptions      = get_option(self::OPTIONS_CRON);
-		$this->summary			= get_option(self::OPTIONS_SUMMARY);
+		self::normalizeOptions();
+		self::$options       = get_option(self::OPTIONS_NAME);
+		self::$cronOptions   = get_option(self::OPTIONS_CRON);
+		self::$summary		 = get_option(self::OPTIONS_SUMMARY);
 	}
 
-	private function normalizeOptions()
+	public static function getInstance(): ?OptionManager {
+		if ( is_null( self::$_instance ) ) {
+			self::$_instance = new self();
+		}
+
+		return self::$_instance;
+	}
+
+	private static function normalizeOptions()
 	{
 		if( is_bool( get_option(self::OPTIONS_NAME) ) ) {
 			update_option( self::OPTIONS_NAME, [
 				'enable'		=> false,
-				'fields'		=> $this->fieldsOptions(),
+				'fields'		=> self::fieldsOptions(),
 				'post_type'		=> PropertiesManager::POSTTYPE,
-				'features'		=> $this->featuresOptions(),
+				'features'		=> self::featuresOptions(),
 			 ] );
 		}
 		if( is_bool( get_option( self::OPTIONS_CRON ) ) ) {
@@ -40,11 +50,11 @@ class OptionManager
 			]);
 		}
 		if( is_bool( get_option(self::OPTIONS_SUMMARY ) ) ) {
-			update_option(self::OPTIONS_SUMMARY, $this->resumeObject() );
+			update_option(self::OPTIONS_SUMMARY, self::resumeObject() );
 		}
 	}
 
-	public function initialize()
+	private static function initialize()
 	{
 		update_option( self::OPTIONS_NAME, [
 			'enable'		=> false,
@@ -56,55 +66,55 @@ class OptionManager
 			'next'          => 1,
 			'total'         => 1
 		]);
-		update_option(self::OPTIONS_SUMMARY, $this->resumeObject() );
+		update_option(self::OPTIONS_SUMMARY, self::resumeObject() );
 	}
 
 	public function getFieldsMapping(): array
 	{
-		return $this->fieldsOptions();
+		return self::fieldsOptions();
 	}
 
 	public function getNextPage()
 	{
-		return $this->cronOptions['next'];
+		return self::$cronOptions['next'];
 	}
 
 	public function updateCronOptions( $total )
 	{
-		if( $this->cronOptions['next'] >= $total ) {
-			$this->cronOptions['next'] = 1;
-			update_option(self::OPTIONS_SUMMARY, $this->resumeObject() );
+		if( self::$cronOptions['next'] >= $total ) {
+			self::$cronOptions['next'] = 1;
+			update_option(self::OPTIONS_SUMMARY, self::resumeObject() );
 
 		} else {
-			$this->cronOptions['next'] = $this->cronOptions['next'] + 1;
+			self::$cronOptions['next'] = self::$cronOptions['next'] + 1;
 		}
-		$this->cronOptions['total'] = $total;
-		update_option(self::OPTIONS_CRON, $this->cronOptions);
+		self::$cronOptions['total'] = $total;
+		update_option(self::OPTIONS_CRON, self::$cronOptions);
 	}
 
 	public function toggleEnable()
 	{
-		if( isset( $this->options['enable'] )) {
-			$this->options['enable'] = !$this->options['enable'];
+		if( isset( self::$options['enable'] )) {
+			self::$options['enable'] = !self::$options['enable'];
 		} else {
-			$this->options['enable'] = false;
+			self::$options['enable'] = false;
 			CronEvent::getInstance()->deactivate();
 		}
-		update_option( self::OPTIONS_NAME, $this->options );
+		update_option( self::OPTIONS_NAME, self::$options );
 	}
 
 	public function getEnable(): bool
 	{
-		if( !isset( $this->options['enable'] ) ) {
-			$this->initialize();
+		if( !isset( self::$options['enable'] ) ) {
+			self::initialize();
 			CronEvent::getInstance()->deactivate();
 			return false;
 		} else {
-			return $this->options['enable'];
+			return self::$options['enable'];
 		}
 	}
 
-	private function resumeObject(): array
+	private static function resumeObject(): array
 	{
 		return [
 			'excluidos'		=> [ 'valor' => 0, 'codigos' => [] ],
@@ -115,23 +125,23 @@ class OptionManager
 
 	public function setExcluded( $code )
 	{
-		$this->summary['excluidos']['valor'] = $this->summary['excluidos']['valor'] + 1;
-		$this->summary['excluidos']['codigos'][] = $code;
-		update_option( self::OPTIONS_SUMMARY, $this->summary );
+		self::$summary['excluidos']['valor'] = self::$summary['excluidos']['valor'] + 1;
+		self::$summary['excluidos']['codigos'][] = $code;
+		update_option( self::OPTIONS_SUMMARY, self::$summary );
 	}
 
 	public function setAdded( $code )
 	{
-		$this->summary['cadastrados']['valor'] = $this->summary['cadastrados']['valor'] + 1;
-		$this->summary['cadastrados']['codigos'][] = $code;
-		update_option( self::OPTIONS_SUMMARY, $this->options );
+		self::$summary['cadastrados']['valor'] = self::$summary['cadastrados']['valor'] + 1;
+		self::$summary['cadastrados']['codigos'][] = $code;
+		update_option( self::OPTIONS_SUMMARY, self::$options );
 	}
 
 	public function setUpdated( $code )
 	{
-		$this->summary['atualizados']['valor'] = $this->summary['atualizados']['valor'] + 1;
-		$this->summary['atualizados']['codigos'][] = $code;
-		update_option( self::OPTIONS_SUMMARY, $this->summary );
+		self::$summary['atualizados']['valor'] = self::$summary['atualizados']['valor'] + 1;
+		self::$summary['atualizados']['codigos'][] = $code;
+		update_option( self::OPTIONS_SUMMARY, self::$summary );
 	}
 
 	public function getSummary(): string
@@ -139,21 +149,21 @@ class OptionManager
 		$html = "<div class='summary-container'>";
 		$html .= "<div class='summary-item'>";
 		$html .= "<span class='summary-title'>Imóveis excluídos: </span>";
-		$html .= "<span class='summary-value'>" . $this->summary['excluidos']['valor'] . "</span>";
+		$html .= "<span class='summary-value'>" . self::$summary['excluidos']['valor'] . "</span>";
 		$html .= "</div>";
 		$html .= "<div class='summary-item'>";
 		$html .= "<span class='summary-title'>Imóveis cadastrados: </span>";
-		$html .= "<span class='summary-value'>" . $this->summary['cadastrados']['valor'] . "</span>";
+		$html .= "<span class='summary-value'>" . self::$summary['cadastrados']['valor'] . "</span>";
 		$html .= "</div>";
 		$html .= "<div class='summary-item'>";
 		$html .= "<span class='summary-title'>Imóveis atualizados: </span>";
-		$html .= "<span class='summary-value'>" . $this->summary['atualizados']['valor'] . "</span>";
+		$html .= "<span class='summary-value'>" . self::$summary['atualizados']['valor'] . "</span>";
 		$html .= "</div>";
 		$html .= "</div>";
 		return $html;
 	}
 
-	private function fieldsOptions(): array
+	private static function fieldsOptions(): array
 	{
 		return [
 			[ "crm" => "TituloSite", "jet" => "nome" ],
@@ -204,7 +214,7 @@ class OptionManager
 		];
 	}
 
-	private function featuresOptions(): array{
+	private static function featuresOptions(): array{
 		return [
 			[ "crm" => "Agua Quente", "jet" => "Agua Quente" ],
 			[ "crm" => "Ar Condicionado", "jet" => "Ar Condicionado" ],

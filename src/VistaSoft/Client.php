@@ -52,14 +52,13 @@ class Client
 
     public function listRealStates()
     {
-        $options    = new OptionManager();
-        $page       = $options->getNextPage();
+        $page       = OptionManager::getInstance()->getNextPage();
         $this->logger->add( "Listando imóveis do CRM - página: " . $page );
 	    $items = $this->listRequest( true, $page );
         if( empty( $items ) ) {
             $this->logger->add("Nenhum imóvel retornado");
         } else {
-	        $options->updateCronOptions( $items->paginas );
+	        OptionManager::getInstance()->updateCronOptions( $items->paginas );
             $this->walkThrough( $items );
             $manager = new PropertiesManager( $this );
             $manager->run();
@@ -110,10 +109,6 @@ class Client
             return "";
         }
 		$content = json_decode( wp_remote_retrieve_body( $response ) );
-		if($content->status === 400) {
-			$this->logger->add( "Erro ao importar dados do imóvel: " . $id . " - " . $content->message );
-			return "";
-		}
         return $content;
     }
 

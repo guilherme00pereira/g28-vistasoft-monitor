@@ -20,7 +20,7 @@ class PropertiesManager
 	public function __construct(Client $client)
 	{
 		$this->dbKeys = $this->getIdsFromDB();
-		$this->options = new OptionManager();
+		$this->options = OptionManager::getInstance();
 		$this->vistasoft = $client;
 		$this->logger = $client->getLogger();
 	}
@@ -51,17 +51,17 @@ class PropertiesManager
 		$this->doImports();
 		foreach ($this->vistasoft->getCodesQueue() as $code) {
 			sleep(2);
-			$exibir 	= $code['exibir'];
-			$codigo 	= $code['codigo'];
+			$exibir = $code['exibir'];
+			$codigo = $code['codigo'];
 			try {
-				if ( $exibir === "Sim") {
+				if ($exibir === "Sim") {
 					$data = $this->vistasoft->getRealStateData($codigo);
 					[$meta_values, $terms] = $this->mapColumns($data);
 					if (in_array($codigo, $this->dbKeys)) {
-						$this->logger->add( "Atualizando dados do imóvel: " . $codigo);
+						$this->logger->add("Atualizando dados do imóvel: " . $codigo);
 
 					} else {
-						$this->logger->add( "Cadastrando o imóvel: " . $codigo);
+						$this->logger->add("Cadastrando o imóvel: " . $codigo);
 					}
 					$this->updateDatabaseContent($meta_values, $codigo, $terms);
 					$key = array_search($codigo, $this->dbKeys);
@@ -69,25 +69,25 @@ class PropertiesManager
 						unset($this->dbKeys[$key]);
 					}
 				} else {
-					$this->logger->add( "Imóvel: " . $codigo . " não deve ser exibido no site");
+					$this->logger->add("Imóvel: " . $codigo . " não deve ser exibido no site");
 					$this->remove($codigo);
 					$this->options->setExcluded($codigo);
 				}
 			} catch (Exception $e) {
-				$this->logger->add( "Erro ao processar o imóvel de código " . $codigo . ": " . $e->getMessage());
+				$this->logger->add("Erro ao processar o imóvel de código " . $codigo . ": " . $e->getMessage());
 			}
 		}
-		
+
 		$this->logger->add("Importação dos imóveis finalizada!");
 	}
 
 	public function remove($code)
 	{
 		try {
-			$this->logger->add( "Removendo o imóvel: " . $code);
+			$this->logger->add("Removendo o imóvel: " . $code);
 			$this->cleanDatabaseAndMediaContent($code);
 		} catch (Exception $e) {
-			$this->logger->add( "Erro ao remover o imóvel no BD: " . $e->getMessage());
+			$this->logger->add("Erro ao remover o imóvel no BD: " . $e->getMessage());
 		}
 	}
 
@@ -97,7 +97,6 @@ class PropertiesManager
 		list($title, $type) = $this->checkIfEmbarcacao($values);
 		$action = is_null($post) ? "cadastrado" : "atualizado";
 		if (is_null($post)) {
-			$this->logger->add( "Cadastrando post " . $post['ID'] . " - " . $post['title'] . " metadata.");
 			$post = wp_insert_post([
 				'post_title' => $title,
 				'post_content' => empty($values['descricao-do-imovel']) ? "" : $values['descricao-do-imovel'],
@@ -112,7 +111,7 @@ class PropertiesManager
 				}
 			}
 		} else {
-			$this->logger->add( "Atualizando post " . $post['ID'] . " - " . $post['title'] . " metadata.");
+			$this->logger->add("Atualizando post " . $post['ID'] . " - " . $post['title'] . " metadata.");
 			wp_update_post([
 				'ID' => $post['ID'],
 				'post_title' => $title,
@@ -129,98 +128,102 @@ class PropertiesManager
 				}
 			}
 		}
-		$this->logger->add( "Imóvel " . $code . " - " . $post['title'] . " " . $action . " com sucesso!");
+		$this->logger->add("Imóvel " . $code . " - " . $post['title'] . " " . $action . " com sucesso!");
 	}
 
 	private function cleanDatabaseAndMediaContent($code)
 	{
 		$post = $this->getPostByMetaCode($code);
-		$this->logger->add( "pegou post: " . $post['ID']);
+		$this->logger->add("pegou post: " . $post['ID']);
 		//remove post media
 		$medias = explode(",", get_post_meta($post['ID'], 'galeria-de-imagens', true)); //get_attached_media( '', $post->ID );
 		foreach ($medias as $media) {
-			$this->logger->add( "removendo image ID: " . $media);
+			$this->logger->add("removendo image ID: " . $media);
 			wp_delete_attachment($media, true);
 		}
 		//remove post
 		wp_delete_post($post['ID']);
-		$this->logger->add( "Imóvel " . $code . " removido com sucesso!");
+		$this->logger->add("Imóvel " . $code . " removido com sucesso!");
 	}
 
 	private function mapColumns($data): array
 	{
-		$fields = [];
-		$regions = [];
-		$isEnterprise = false;
-		foreach ($data as $key => $value) {
-			$idx = $this->fieldsMap()[$key];
-			if (!empty($idx)) {
-				if ("FotoDestaque" === $key) {
-					$fields[$idx] = $this->getImageId($value);
-				} else if (in_array($key, CRMFields::BOOLEAND_FIELDS)) {
-					if ($key === "Lancamento") {
-						$this->logger->add( "Lançamento: " . $value);
-						$isEnterprise = $value === "Sim";
-					}
+		try {
+			$fields = [];
+			$regions = [];
+			$isEnterprise = false;
+			foreach ($data as $key => $value) {
+				$idx = $this->fieldsMap()[$key];
+				if (!empty($idx)) {
+					if ("FotoDestaque" === $key) {
+						$fields[$idx] = $this->getImageId($value);
+					} else if (in_array($key, CRMFields::BOOLEAND_FIELDS)) {
+						if ($key === "Lancamento") {
+							$this->logger->add("Lançamento: " . $value);
+							$isEnterprise = $value === "Sim";
+						}
 
-					$fields[$idx] = $value === "Sim" ? "true" : "false";
-				} else if (in_array($key, ["UF", "Cidade", "Bairro"])) {
-					$fields[$idx] = $value;
-					$regions[$key] = $value;
-				} else if ("Elemento" === $key) {
-					$fields[$idx] = $this->elementArray($value);
-				} else if ("Status" === $key) {
-					$fields[$idx] = $value;
-					$fields['finalidade'] = CRMFields::mapFinalidades($value);
-				} else if (is_array($value)) {
-					$fields[$idx] = implode(",", $value);
-				} else if (is_object($value)) {
-					if ("Caracteristicas" === $key) {
-						$features = [];
-						foreach ($value as $j => $z) {
-							if (!is_object($z)) {
-								if ("Sim" === trim($z)) {
-									$features[] = $j;
+						$fields[$idx] = $value === "Sim" ? "true" : "false";
+					} else if (in_array($key, ["UF", "Cidade", "Bairro"])) {
+						$fields[$idx] = $value;
+						$regions[$key] = $value;
+					} else if ("Elemento" === $key) {
+						$fields[$idx] = $this->elementArray($value);
+					} else if ("Status" === $key) {
+						$fields[$idx] = $value;
+						$fields['finalidade'] = CRMFields::mapFinalidades($value);
+					} else if (is_array($value)) {
+						$fields[$idx] = implode(",", $value);
+					} else if (is_object($value)) {
+						if ("Caracteristicas" === $key) {
+							$features = [];
+							foreach ($value as $j => $z) {
+								if (!is_object($z)) {
+									if ("Sim" === trim($z)) {
+										$features[] = $j;
+									}
 								}
 							}
+							$fields[$idx] = $features;
 						}
-						$fields[$idx] = $features;
-					}
-					if ("Infraestrutura" === $key) {
-						$infrastructure = [];
-						foreach ($value as $j => $z) {
-							if (!is_object($z)) {
-								if ("Sim" === trim($z)) {
-									$infrastructure[] = $j;
+						if ("Infraestrutura" === $key) {
+							$infrastructure = [];
+							foreach ($value as $j => $z) {
+								if (!is_object($z)) {
+									if ("Sim" === trim($z)) {
+										$infrastructure[] = $j;
+									}
 								}
 							}
+							$fields[$idx] = $infrastructure;
 						}
-						$fields[$idx] = $infrastructure;
-					}
-					if ("Foto" === $key) {
-						$photos = [];
-						foreach ($value as $item) {
-							$photos[] = $this->getImageId($item->Foto);
+						if ("Foto" === $key) {
+							$photos = [];
+							foreach ($value as $item) {
+								$photos[] = $this->getImageId($item->Foto);
+							}
+							$fields[$idx] = implode(",", $photos);
 						}
-						$fields[$idx] = implode(",", $photos);
+						if ("Video" === $key) {
+							$fields['video2'] = $value['Video'] ?? "";
+						}
+					} else {
+						$fields[$idx] = $value === "0" ? "" : $value;
 					}
-					if ("Video" === $key) {
-						$fields['video2'] = $value['Video'] ?? "";
-					}
-				} else {
-					$fields[$idx] = $value === "0" ? "" : $value;
 				}
 			}
-		}
-		$terms = new TermTaxonomies($regions);
+			$terms = new TermTaxonomies($regions);
 
-		return [$fields, $terms->getTermsIds(), $isEnterprise];
+			return [$fields, $terms->getTermsIds(), $isEnterprise];
+		} catch (Exception $e) {
+			$this->logger->add("Erro ao mapear os dados do imóvel: " . $e->getMessage());
+		}
 	}
 
 	private function fieldsMap(): array
 	{
 		$map = [];
-		$options = new OptionManager();
+		$options = OptionManager::getInstance();
 		$fields = $options->getFieldsMapping();
 		foreach ($fields as $field) {
 			$map[$field['crm']] = $field['jet'];
